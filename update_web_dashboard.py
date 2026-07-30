@@ -18,28 +18,31 @@ NIFTY_50_TICKERS = [
     "TECHM.NS", "TITAN.NS", "ULTRACEMCO.NS", "WIPRO.NS", "SHRIRAMFIN.NS"
 ]
 
+# Popular high-volume low-priced (penny/sub-₹100) stocks on the NSE
+PENNY_STOCK_TICKERS = [
+    "IDEA.NS", "YESBANK.NS", "SUZLON.NS", "JPPOWER.NS", "RPOWER.NS", "HCC.NS", 
+    "ALOKINDS.NS", "INFIBEAM.NS", "UCOBANK.NS", "CENTRALBK.NS", "IOB.NS", 
+    "HFCL.NS", "SEPC.NS", "MOREPENLAB.NS", "VIKASLIFE.NS", "URJA.NS", 
+    "GTLINFRA.NS", "FCSALL.NS", "BCG.NS", "SALASAR.NS", "SJVN.NS", 
+    "NHPC.NS", "SAIL.NS", "IRFC.NS", "GMRINFRA.NS"
+]
+
 # Sector Mapping for Nifty 50 constituents
 SECTOR_MAP = {
-    # Information Technology (IT)
     "INFY.NS": "IT", "TCS.NS": "IT", "WIPRO.NS": "IT", "HCLTECH.NS": "IT", "LTIM.NS": "IT", "TECHM.NS": "IT",
-    # Financial Services / Banking
     "HDFCBANK.NS": "BANKING/FIN", "ICICIBANK.NS": "BANKING/FIN", "AXISBANK.NS": "BANKING/FIN", 
     "SBIN.NS": "BANKING/FIN", "KOTAKBANK.NS": "BANKING/FIN", "INDUSINDBK.NS": "BANKING/FIN", 
     "BAJFINANCE.NS": "BANKING/FIN", "BAJAJFINSV.NS": "BANKING/FIN", "SHRIRAMFIN.NS": "BANKING/FIN",
     "HDFCLIFE.NS": "BANKING/FIN", "SBILIFE.NS": "BANKING/FIN",
-    # Automobile
     "TATAMOTORS.NS": "AUTOMOBILE", "MARUTI.NS": "AUTOMOBILE", "M&M.NS": "AUTOMOBILE", 
     "BAJAJ-AUTO.NS": "AUTOMOBILE", "HEROMOTOCO.NS": "AUTOMOBILE", "EICHERMOT.NS": "AUTOMOBILE",
-    # FMCG & Consumption
     "ITC.NS": "FMCG/CONSUMPTION", "HINDUNILVR.NS": "FMCG/CONSUMPTION", "NESTLEIND.NS": "FMCG/CONSUMPTION", 
     "BRITANNIA.NS": "FMCG/CONSUMPTION", "TATACONSUM.NS": "FMCG/CONSUMPTION", "TITAN.NS": "FMCG/CONSUMPTION",
-    # Energy, Metals & Infrastructure
     "RELIANCE.NS": "ENERGY/INFRA", "COALINDIA.NS": "ENERGY/INFRA", "ONGC.NS": "ENERGY/INFRA", 
     "NTPC.NS": "ENERGY/INFRA", "POWERGRID.NS": "ENERGY/INFRA", "JSWSTEEL.NS": "ENERGY/INFRA", 
     "TATASTEEL.NS": "ENERGY/INFRA", "HINDALCO.NS": "ENERGY/INFRA", "BPCL.NS": "ENERGY/INFRA", 
     "GRASIM.NS": "ENERGY/INFRA", "ADANIENT.NS": "ENERGY/INFRA", "ADANIPORTS.NS": "ENERGY/INFRA",
     "ULTRACEMCO.NS": "ENERGY/INFRA", "ASIANPAINT.NS": "ENERGY/INFRA",
-    # Healthcare & Pharmaceuticals
     "SUNPHARMA.NS": "PHARMA", "CIPLA.NS": "PHARMA", "DRREDDY.NS": "PHARMA", 
     "DIVISLAB.NS": "PHARMA", "APOLLOHOSP.NS": "PHARMA"
 }
@@ -64,12 +67,11 @@ def calculate_atr(df, period=14):
     return tr.rolling(window=period).mean()
 
 def generate_dashboard():
+    # --- STEP 1: SCAN NIFTY 50 STOCKS ---
     print("Fetching Nifty 50 market data...")
     data_df = yf.download(NIFTY_50_TICKERS, period="3mo", interval="1d", group_by="ticker", progress=False)
     
     results = []
-    sector_scores = {}
-    
     for ticker in NIFTY_50_TICKERS:
         try:
             if ticker not in data_df.columns.levels[0]:
@@ -220,7 +222,7 @@ def generate_dashboard():
         print("Empty dataframe.")
         return
         
-    # Calculate Sectoral Momentum (Average percent change of constituents)
+    # Calculate Sectoral Momentum
     sector_perf = df_all.groupby('sector')['change_pct'].mean().to_dict()
     
     longs = df_all[df_all['bull_score'] >= 45].sort_values(by='bull_score', ascending=False).head(3)
@@ -229,6 +231,61 @@ def generate_dashboard():
     target_date_str = longs['target_date'].iloc[0] if not longs.empty else df_all['target_date'].iloc[0]
     trading_date_str = longs['trading_date'].iloc[0] if not longs.empty else df_all['trading_date'].iloc[0]
     
+    # --- STEP 2: SCAN PENNY STOCKS FOR HIGH-VOLUME BREAKOUTS ---
+    print("Scanning potential penny stocks...")
+    penny_df = yf.download(PENNY_STOCK_TICKERS, period="1mo", interval="1d", group_by="ticker", progress=False)
+    penny_results = []
+    
+    for ticker in PENNY_STOCK_TICKERS:
+        try:
+            if ticker not in penny_df.columns.levels[0]:
+                continue
+            df_p = penny_df[ticker].copy().dropna(subset=['Close', 'Volume'])
+            if len(df_p) < 15:
+                continue
+            if isinstance(df_p.columns, pd.MultiIndex):
+                df_p.columns = df_p.columns.get_level_values(0)
+                
+            # Read completed index (using same rules)
+            today_str = datetime.date.today().strftime('%Y-%m-%d')
+            if df_p.index[-1].strftime('%Y-%m-%d') == today_str:
+                analysis_idx = -2
+            else:
+                analysis_idx = -1
+                
+            row_p = df_p.iloc[analysis_idx]
+            close_p = float(row_p['Close'])
+            vol_p = float(row_p['Volume'])
+            
+            # Simple technical calculations
+            avg_vol_20 = df_p['Volume'].rolling(window=15).mean().iloc[analysis_idx]
+            rvol_p = vol_p / (avg_vol_20 + 1e-10)
+            
+            prev_close_p = float(df_p['Close'].iloc[analysis_idx - 1])
+            change_p = ((close_p - prev_close_p) / prev_close_p) * 100
+            
+            # Filter criteria: Price under ₹100, showing positive momentum and high volume spike
+            # RVOL > 1.2 indicates accumulation. High volume breakout is the #1 signal a stock is going to hit an upper circuit!
+            if 1.0 <= close_p <= 100.0 and rvol_p >= 1.2:
+                penny_results.append({
+                    'ticker': ticker,
+                    'symbol': ticker.replace(".NS", ""),
+                    'close': close_p,
+                    'rvol': rvol_p,
+                    'change_pct': change_p,
+                })
+        except Exception as e:
+            print(f"Error scanning penny ticker {ticker}: {e}")
+            continue
+            
+    df_penny_results = pd.DataFrame(penny_results)
+    if not df_penny_results.empty:
+        # Sort by Volume spike and Daily percentage return to find potential "Circuit Candidates"
+        top_penny_stocks = df_penny_results.sort_values(by=['rvol', 'change_pct'], ascending=False).head(5)
+    else:
+        top_penny_stocks = pd.DataFrame()
+        
+    # --- STEP 3: BUILD HTML ---
     # Generate HTML Sector Heatmap Cards
     sector_heatmap_html = ""
     for sect, perf in sector_perf.items():
@@ -250,7 +307,7 @@ def generate_dashboard():
         </div>
         """
         
-    # Generate HTML Cards for Bullish long candidates with active Position Size Calculators
+    # Generate HTML Cards for Bullish long candidates (Without Kite Buttons)
     longs_html = ""
     card_index = 0
     for idx, row in longs.iterrows():
@@ -259,10 +316,6 @@ def generate_dashboard():
         sl = entry - (row['atr'] * 0.5)
         t1 = entry + (row['atr'] * 0.75)
         t2 = entry + (row['atr'] * 1.5)
-        
-        # Create a Kite Basket Order Deep Link
-        # A deep link allows pre-filling the basket securely and for free
-        kite_url = f"https://kite.zerodha.com/connect/basket?data=%5B%7B%22variety%22%3A%22regular%22%2C%22exchange%22%3A%22NSE%22%2C%22tradingsymbol%22%3A%22{row['symbol']}%22%2C%22transaction_type%22%3A%22BUY%22%2C%22order_type%22%3A%22LIMIT%22%2C%22price%22%3A{entry:.2f}%2C%22product%22%3A%22MIS%22%2C%22validity%22%3A%22DAY%22%7D%5D"
 
         longs_html += f"""
         <div class="bg-gray-800 border border-green-500 rounded-xl p-6 shadow-lg hover:shadow-2xl transition duration-300 flex flex-col justify-between">
@@ -298,7 +351,7 @@ def generate_dashboard():
                     </div>
                 </div>
                 
-                <div class="space-y-2 mb-6">
+                <div class="space-y-2 mb-4">
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-green-400 font-bold uppercase">Trigger Entry (Above)</span>
                         <span class="font-black text-white">₹{entry:,.2f}</span>
@@ -349,7 +402,7 @@ def generate_dashboard():
                 </div>
             </div>
             
-            <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 text-xs text-gray-400 mb-4">
+            <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 text-xs text-gray-400">
                 <div class="grid grid-cols-3 text-center gap-1">
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Resistance 2</span>
@@ -365,15 +418,10 @@ def generate_dashboard():
                     </div>
                 </div>
             </div>
-            
-            <!-- SECURE DEEP-LINK BUTTON -->
-            <a href="{kite_url}" target="_blank" class="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-black text-center py-3 px-4 rounded-xl shadow-md transition duration-300 flex items-center justify-center gap-2">
-                <i class="fa-solid fa-bolt"></i> Trade with Zerodha (Kite)
-            </a>
         </div>
         """
         
-    # Generate HTML Cards for Bearish short candidates with active Position Size Calculators
+    # Generate HTML Cards for Bearish short candidates (Without Kite Buttons)
     shorts_html = ""
     for idx, row in shorts.iterrows():
         card_index += 1
@@ -381,8 +429,6 @@ def generate_dashboard():
         sl = entry + (row['atr'] * 0.5)
         t1 = entry - (row['atr'] * 0.75)
         t2 = entry - (row['atr'] * 1.5)
-        
-        kite_url = f"https://kite.zerodha.com/connect/basket?data=%5B%7B%22variety%22%3A%22regular%22%2C%22exchange%22%3A%22NSE%22%2C%22tradingsymbol%22%3A%22{row['symbol']}%22%2C%22transaction_type%22%3A%22SELL%22%2C%22order_type%22%3A%22LIMIT%22%2C%22price%22%3A{entry:.2f}%2C%22product%22%3A%22MIS%22%2C%22validity%22%3A%22DAY%22%7D%5D"
 
         shorts_html += f"""
         <div class="bg-gray-800 border border-red-500 rounded-xl p-6 shadow-lg hover:shadow-2xl transition duration-300 flex flex-col justify-between">
@@ -418,7 +464,7 @@ def generate_dashboard():
                     </div>
                 </div>
                 
-                <div class="space-y-2 mb-6">
+                <div class="space-y-2 mb-4">
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-red-400 font-bold uppercase">Trigger Entry (Below)</span>
                         <span class="font-black text-white">₹{entry:,.2f}</span>
@@ -469,7 +515,7 @@ def generate_dashboard():
                 </div>
             </div>
             
-            <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 text-xs text-gray-400 mb-4">
+            <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 text-xs text-gray-400">
                 <div class="grid grid-cols-3 text-center gap-1">
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Pivot (P)</span>
@@ -485,14 +531,53 @@ def generate_dashboard():
                     </div>
                 </div>
             </div>
-            
-            <!-- SECURE DEEP-LINK BUTTON -->
-            <a href="{kite_url}" target="_blank" class="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-black text-center py-3 px-4 rounded-xl shadow-md transition duration-300 flex items-center justify-center gap-2">
-                <i class="fa-solid fa-bolt"></i> Trade with Zerodha (Kite)
-            </a>
         </div>
         """
         
+    # Generate HTML for Penny Stock Momentum cards
+    penny_cards_html = ""
+    if top_penny_stocks.empty:
+        penny_cards_html = """
+        <div class="col-span-full text-center py-6 text-gray-400 text-sm">
+            <i class="fa-solid fa-triangle-exclamation text-yellow-500 text-lg mb-2"></i><br>
+            No high-volume penny stock breakouts scanned meeting the criteria today.
+        </div>
+        """
+    else:
+        for idx, row in top_penny_stocks.iterrows():
+            perf = row['change_pct']
+            color = "text-green-400" if perf >= 0 else "text-red-400"
+            symbol_sign = "+" if perf >= 0 else ""
+            
+            # Simple assessment of why it's a breakout
+            alert_reason = "🔥 Volume Spike" if row['rvol'] >= 3.0 else "⚡ Momentum Breakout" if perf >= 4.0 else "📈 Steady Accumulation"
+            
+            penny_cards_html += f"""
+            <div class="bg-slate-900/60 border border-indigo-500/20 rounded-xl p-4 flex flex-col justify-between hover:border-indigo-500/50 hover:bg-slate-900/90 transition duration-300">
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h4 class="text-lg font-black text-white">{row['symbol']}</h4>
+                        <span class="text-[9px] font-bold text-indigo-300 uppercase tracking-widest bg-indigo-950/60 border border-indigo-500/10 px-2 py-0.5 rounded-full">{alert_reason}</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-[9px] text-gray-500 font-bold uppercase block">Price</span>
+                        <span class="font-extrabold text-white text-base">₹{row['close']:.2f}</span>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-2 border-t border-gray-800 pt-3 mt-3 text-xs">
+                    <div>
+                        <span class="text-gray-500 text-[9px] block uppercase">Rel Volume (RVOL)</span>
+                        <span class="font-extrabold text-white">{row['rvol']:.2f}x</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500 text-[9px] block uppercase">Day Change</span>
+                        <span class="font-extrabold {color}">{symbol_sign}{perf:.2f}%</span>
+                    </div>
+                </div>
+            </div>
+            """
+
     # Full Leaderboard Table HTML
     leaderboard_html = ""
     sorted_all = df_all.sort_values(by=['bull_score', 'bear_score'], ascending=False)
@@ -592,6 +677,34 @@ def generate_dashboard():
             </h3>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
                 {sector_heatmap_html}
+            </div>
+        </div>
+
+        <!-- HIGH MOMENTUM PENNY STOCK FINDER -->
+        <div class="mb-8 bg-gradient-to-r from-slate-950 to-indigo-950 rounded-2xl p-6 border border-indigo-500/20 shadow-lg">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
+                <div>
+                    <h3 class="text-lg font-black text-white flex items-center gap-2">
+                        <i class="fa-solid fa-circle-nodes text-indigo-400"></i> Penny Stock Momentum Breakout Finder
+                    </h3>
+                    <p class="text-xs text-gray-400 mt-1">
+                        Scans low-priced stocks (₹1 to ₹100) on the NSE to find massive volume spikes indicating strong buying demand and potential "Upper Circuit" targets.
+                    </p>
+                </div>
+                <span class="text-[10px] text-yellow-400 font-extrabold bg-yellow-950/50 border border-yellow-500/20 px-3 py-1 rounded-full uppercase tracking-widest flex items-center gap-1">
+                    <i class="fa-solid fa-circle-exclamation text-xs"></i> Extremely Volatile Risk Warning
+                </span>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                {penny_cards_html}
+            </div>
+            
+            <div class="mt-4 p-3 bg-indigo-950/20 rounded-lg border border-indigo-500/10 text-[10px] leading-relaxed text-gray-400 flex gap-2 items-start">
+                <i class="fa-solid fa-circle-info text-indigo-400 mt-0.5 text-xs"></i>
+                <p>
+                    <strong>💡 How daily price circuits work:</strong> The National Stock Exchange (NSE) applies daily circuit bands (2%, 5%, 10%, or 20%) to penny stocks to limit excessive speculation. High Relative Volume (RVOL) is the primary engine behind circuit breakouts. <strong>Warning:</strong> Penny stocks carry severe liquidity risks. If a stock hits its lower circuit limit, buyers disappear entirely, leaving you unable to sell or exit your shares. Always practice absolute stop-loss discipline.
+                </p>
             </div>
         </div>
 
