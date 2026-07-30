@@ -18,6 +18,32 @@ NIFTY_50_TICKERS = [
     "TECHM.NS", "TITAN.NS", "ULTRACEMCO.NS", "WIPRO.NS", "SHRIRAMFIN.NS"
 ]
 
+# Sector Mapping for Nifty 50 constituents
+SECTOR_MAP = {
+    # Information Technology (IT)
+    "INFY.NS": "IT", "TCS.NS": "IT", "WIPRO.NS": "IT", "HCLTECH.NS": "IT", "LTIM.NS": "IT", "TECHM.NS": "IT",
+    # Financial Services / Banking
+    "HDFCBANK.NS": "BANKING/FIN", "ICICIBANK.NS": "BANKING/FIN", "AXISBANK.NS": "BANKING/FIN", 
+    "SBIN.NS": "BANKING/FIN", "KOTAKBANK.NS": "BANKING/FIN", "INDUSINDBK.NS": "BANKING/FIN", 
+    "BAJFINANCE.NS": "BANKING/FIN", "BAJAJFINSV.NS": "BANKING/FIN", "SHRIRAMFIN.NS": "BANKING/FIN",
+    "HDFCLIFE.NS": "BANKING/FIN", "SBILIFE.NS": "BANKING/FIN",
+    # Automobile
+    "TATAMOTORS.NS": "AUTOMOBILE", "MARUTI.NS": "AUTOMOBILE", "M&M.NS": "AUTOMOBILE", 
+    "BAJAJ-AUTO.NS": "AUTOMOBILE", "HEROMOTOCO.NS": "AUTOMOBILE", "EICHERMOT.NS": "AUTOMOBILE",
+    # FMCG & Consumption
+    "ITC.NS": "FMCG/CONSUMPTION", "HINDUNILVR.NS": "FMCG/CONSUMPTION", "NESTLEIND.NS": "FMCG/CONSUMPTION", 
+    "BRITANNIA.NS": "FMCG/CONSUMPTION", "TATACONSUM.NS": "FMCG/CONSUMPTION", "TITAN.NS": "FMCG/CONSUMPTION",
+    # Energy, Metals & Infrastructure
+    "RELIANCE.NS": "ENERGY/INFRA", "COALINDIA.NS": "ENERGY/INFRA", "ONGC.NS": "ENERGY/INFRA", 
+    "NTPC.NS": "ENERGY/INFRA", "POWERGRID.NS": "ENERGY/INFRA", "JSWSTEEL.NS": "ENERGY/INFRA", 
+    "TATASTEEL.NS": "ENERGY/INFRA", "HINDALCO.NS": "ENERGY/INFRA", "BPCL.NS": "ENERGY/INFRA", 
+    "GRASIM.NS": "ENERGY/INFRA", "ADANIENT.NS": "ENERGY/INFRA", "ADANIPORTS.NS": "ENERGY/INFRA",
+    "ULTRACEMCO.NS": "ENERGY/INFRA", "ASIANPAINT.NS": "ENERGY/INFRA",
+    # Healthcare & Pharmaceuticals
+    "SUNPHARMA.NS": "PHARMA", "CIPLA.NS": "PHARMA", "DRREDDY.NS": "PHARMA", 
+    "DIVISLAB.NS": "PHARMA", "APOLLOHOSP.NS": "PHARMA"
+}
+
 def calculate_rsi(series, period=14):
     delta = series.diff()
     gain = delta.where(delta > 0, 0.0)
@@ -38,10 +64,11 @@ def calculate_atr(df, period=14):
     return tr.rolling(window=period).mean()
 
 def generate_dashboard():
-    print("Fetching market data...")
+    print("Fetching Nifty 50 market data...")
     data_df = yf.download(NIFTY_50_TICKERS, period="3mo", interval="1d", group_by="ticker", progress=False)
     
     results = []
+    sector_scores = {}
     
     for ticker in NIFTY_50_TICKERS:
         try:
@@ -107,6 +134,10 @@ def generate_dashboard():
             bb_upper = float(row['BB_Upper'])
             bb_lower = float(row['BB_Lower'])
             
+            # Calculate daily price return for sectoral scoring
+            prev_close = float(df['Close'].iloc[analysis_idx - 1])
+            daily_pct_change = ((close - prev_close) / prev_close) * 100
+            
             # Scoring
             bullish_score = 0
             bearish_score = 0
@@ -154,9 +185,12 @@ def generate_dashboard():
             r2 = pivot + (high - low)
             s2 = pivot - (high - low)
             
+            sector = SECTOR_MAP.get(ticker, "OTHER")
+            
             results.append({
                 'ticker': ticker,
                 'symbol': ticker.replace(".NS", ""),
+                'sector': sector,
                 'close': close,
                 'high': high,
                 'low': low,
@@ -173,6 +207,7 @@ def generate_dashboard():
                 's2': s2,
                 'is_squeeze': is_squeeze,
                 'is_nr7': is_nr7,
+                'change_pct': daily_pct_change,
                 'target_date': target_date.strftime('%Y-%m-%d'),
                 'trading_date': trading_date.strftime('%Y-%m-%d') if hasattr(trading_date, 'strftime') else str(trading_date)
             })
@@ -185,72 +220,136 @@ def generate_dashboard():
         print("Empty dataframe.")
         return
         
+    # Calculate Sectoral Momentum (Average percent change of constituents)
+    sector_perf = df_all.groupby('sector')['change_pct'].mean().to_dict()
+    
     longs = df_all[df_all['bull_score'] >= 45].sort_values(by='bull_score', ascending=False).head(3)
     shorts = df_all[df_all['bear_score'] >= 45].sort_values(by='bear_score', ascending=False).head(3)
     
     target_date_str = longs['target_date'].iloc[0] if not longs.empty else df_all['target_date'].iloc[0]
     trading_date_str = longs['trading_date'].iloc[0] if not longs.empty else df_all['trading_date'].iloc[0]
     
-    # Generate HTML Cards
+    # Generate HTML Sector Heatmap Cards
+    sector_heatmap_html = ""
+    for sect, perf in sector_perf.items():
+        perf_color = "text-green-400" if perf >= 0 else "text-red-400"
+        perf_bg = "bg-green-950/40 border-green-500/20" if perf >= 0 else "bg-red-950/40 border-red-500/20"
+        perf_symbol = "+" if perf >= 0 else ""
+        icon = "fa-laptop-code" if sect == "IT" else "fa-building-columns" if "BANKING" in sect else "fa-car" if sect == "AUTOMOBILE" else "fa-cart-shopping" if "FMCG" in sect else "fa-bolt" if "ENERGY" in sect else "fa-prescription-bottle-medical"
+        
+        sector_heatmap_html += f"""
+        <div class="border rounded-xl p-4 {perf_bg} flex flex-col justify-between shadow transition hover:scale-105 duration-200">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-xs text-slate-400 font-bold uppercase tracking-wider">{sect}</span>
+                <i class="fa-solid {icon} text-slate-400 text-sm"></i>
+            </div>
+            <div class="flex justify-between items-end">
+                <span class="text-[10px] text-slate-500 font-semibold uppercase">Daily Momentum</span>
+                <span class="text-lg font-black {perf_color}">{perf_symbol}{perf:.2f}%</span>
+            </div>
+        </div>
+        """
+        
+    # Generate HTML Cards for Bullish long candidates with active Position Size Calculators
     longs_html = ""
+    card_index = 0
     for idx, row in longs.iterrows():
+        card_index += 1
         entry = max(row['close'] * 1.002, row['high'])
         sl = entry - (row['atr'] * 0.5)
         t1 = entry + (row['atr'] * 0.75)
         t2 = entry + (row['atr'] * 1.5)
+        
+        # Create a Kite Basket Order Deep Link
+        # A deep link allows pre-filling the basket securely and for free
+        kite_url = f"https://kite.zerodha.com/connect/basket?data=%5B%7B%22variety%22%3A%22regular%22%2C%22exchange%22%3A%22NSE%22%2C%22tradingsymbol%22%3A%22{row['symbol']}%22%2C%22transaction_type%22%3A%22BUY%22%2C%22order_type%22%3A%22LIMIT%22%2C%22price%22%3A{entry:.2f}%2C%22product%22%3A%22MIS%22%2C%22validity%22%3A%22DAY%22%7D%5D"
+
         longs_html += f"""
-        <div class="bg-gray-800 border border-green-500 rounded-xl p-6 shadow-lg hover:shadow-2xl transition duration-300">
-            <div class="flex justify-between items-start mb-4">
-                <div>
-                    <span class="bg-green-900 text-green-300 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">BUY LONG</span>
-                    <h3 class="text-2xl font-black text-white mt-2">{row['symbol']}</h3>
-                    <p class="text-xs text-gray-400 font-medium">{row['ticker']}</p>
+        <div class="bg-gray-800 border border-green-500 rounded-xl p-6 shadow-lg hover:shadow-2xl transition duration-300 flex flex-col justify-between">
+            <div>
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <span class="bg-green-900 text-green-300 text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">BUY LONG</span>
+                        <h3 class="text-2xl font-black text-white mt-2">{row['symbol']}</h3>
+                        <p class="text-xs text-gray-400 font-medium">{row['ticker']} • Sector: <span class="text-indigo-300 font-bold">{row['sector']}</span></p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs text-gray-400 font-semibold block uppercase">Quant Score</span>
+                        <span class="text-3xl font-black text-green-400">{row['bull_score']}<span class="text-xs text-gray-500">/100</span></span>
+                    </div>
                 </div>
-                <div class="text-right">
-                    <span class="text-xs text-gray-400 font-semibold block uppercase">Quant Score</span>
-                    <span class="text-3xl font-black text-green-400">{row['bull_score']}<span class="text-xs text-gray-500">/100</span></span>
+                
+                <div class="grid grid-cols-2 gap-4 border-t border-b border-gray-700 py-3 my-4 text-sm text-gray-300">
+                    <div>
+                        <span class="text-gray-500 text-xs block uppercase">Close Price</span>
+                        <span class="font-bold text-lg text-white">₹{row['close']:,.2f}</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500 text-xs block uppercase">Avg Range (ATR%)</span>
+                        <span class="font-bold text-lg text-white">{row['atr_pct']:.2f}%</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500 text-xs block uppercase">Rel Volume (RVOL)</span>
+                        <span class="font-bold text-lg text-white">{row['rvol']:.2f}x</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500 text-xs block uppercase">RSI (14)</span>
+                        <span class="font-bold text-lg text-white">{row['rsi']:.1f}</span>
+                    </div>
+                </div>
+                
+                <div class="space-y-2 mb-6">
+                    <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
+                        <span class="text-green-400 font-bold uppercase">Trigger Entry (Above)</span>
+                        <span class="font-black text-white">₹{entry:,.2f}</span>
+                    </div>
+                    <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
+                        <span class="text-red-400 font-bold uppercase">Stop-Loss (SL)</span>
+                        <span class="font-black text-white" id="sl-long-{card_index}">₹{sl:,.2f}</span>
+                    </div>
+                    <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
+                        <span class="text-yellow-400 font-bold uppercase">Target 1 (1:1 R:R)</span>
+                        <span class="font-black text-white">₹{t1:,.2f}</span>
+                    </div>
+                    <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
+                        <span class="text-emerald-400 font-bold uppercase">Target 2 (2:1 R:R)</span>
+                        <span class="font-black text-white">₹{t2:,.2f}</span>
+                    </div>
                 </div>
             </div>
             
-            <div class="grid grid-cols-2 gap-4 border-t border-b border-gray-700 py-3 my-4 text-sm text-gray-300">
-                <div>
-                    <span class="text-gray-500 text-xs block uppercase">Close Price</span>
-                    <span class="font-bold text-lg text-white">₹{row['close']:,.2f}</span>
+            <!-- POSITION SIZING CALCULATOR -->
+            <div class="bg-slate-900 p-4 rounded-xl border border-indigo-500/20 my-4 text-xs">
+                <h4 class="font-black text-indigo-400 mb-2 uppercase tracking-wide flex items-center gap-1">
+                    <i class="fa-solid fa-calculator"></i> Smart Position Sizer
+                </h4>
+                <div class="grid grid-cols-2 gap-3 mb-3">
+                    <div>
+                        <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Trading Capital</label>
+                        <input type="number" id="capital-long-{card_index}" value="50000" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionLong({card_index}, {entry}, {sl})">
+                    </div>
+                    <div>
+                        <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Risk per Trade (%)</label>
+                        <input type="number" id="risk-long-{card_index}" value="1" step="0.5" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionLong({card_index}, {entry}, {sl})">
+                    </div>
                 </div>
-                <div>
-                    <span class="text-gray-500 text-xs block uppercase">Avg Range (ATR%)</span>
-                    <span class="font-bold text-lg text-white">{row['atr_pct']:.2f}%</span>
-                </div>
-                <div>
-                    <span class="text-gray-500 text-xs block uppercase">Rel Volume (RVOL)</span>
-                    <span class="font-bold text-lg text-white">{row['rvol']:.2f}x</span>
-                </div>
-                <div>
-                    <span class="text-gray-500 text-xs block uppercase">RSI (14)</span>
-                    <span class="font-bold text-lg text-white">{row['rsi']:.1f}</span>
-                </div>
-            </div>
-            
-            <div class="space-y-2 mb-6">
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
-                    <span class="text-green-400 font-bold uppercase">Trigger Entry (Above)</span>
-                    <span class="font-black text-white">₹{entry:,.2f}</span>
-                </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
-                    <span class="text-red-400 font-bold uppercase">Stop-Loss (SL)</span>
-                    <span class="font-black text-white">₹{sl:,.2f}</span>
-                </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
-                    <span class="text-yellow-400 font-bold uppercase">Target 1 (1:1 R:R)</span>
-                    <span class="font-black text-white">₹{t1:,.2f}</span>
-                </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
-                    <span class="text-emerald-400 font-bold uppercase">Target 2 (2:1 R:R)</span>
-                    <span class="font-black text-white">₹{t2:,.2f}</span>
+                <div class="bg-gray-950 p-2.5 rounded border border-gray-800 space-y-1 text-[11px] text-gray-300">
+                    <div class="flex justify-between">
+                        <span>Max Cash Risk:</span>
+                        <strong class="text-white" id="risk-cash-long-{card_index}">₹500.00</strong>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="font-bold text-emerald-400">Exact Quantity to Buy:</span>
+                        <strong class="text-emerald-400 text-sm font-black" id="qty-long-{card_index}">-- shares</strong>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Required Margin (5x MIS):</span>
+                        <strong class="text-indigo-300" id="margin-long-{card_index}">--</strong>
+                    </div>
                 </div>
             </div>
             
-            <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 text-xs text-gray-400">
+            <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 text-xs text-gray-400 mb-4">
                 <div class="grid grid-cols-3 text-center gap-1">
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Resistance 2</span>
@@ -266,68 +365,111 @@ def generate_dashboard():
                     </div>
                 </div>
             </div>
+            
+            <!-- SECURE DEEP-LINK BUTTON -->
+            <a href="{kite_url}" target="_blank" class="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-black text-center py-3 px-4 rounded-xl shadow-md transition duration-300 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-bolt"></i> Trade with Zerodha (Kite)
+            </a>
         </div>
         """
         
+    # Generate HTML Cards for Bearish short candidates with active Position Size Calculators
     shorts_html = ""
     for idx, row in shorts.iterrows():
+        card_index += 1
         entry = min(row['close'] * 0.998, row['low'])
         sl = entry + (row['atr'] * 0.5)
         t1 = entry - (row['atr'] * 0.75)
         t2 = entry - (row['atr'] * 1.5)
+        
+        kite_url = f"https://kite.zerodha.com/connect/basket?data=%5B%7B%22variety%22%3A%22regular%22%2C%22exchange%22%3A%22NSE%22%2C%22tradingsymbol%22%3A%22{row['symbol']}%22%2C%22transaction_type%22%3A%22SELL%22%2C%22order_type%22%3A%22LIMIT%22%2C%22price%22%3A{entry:.2f}%2C%22product%22%3A%22MIS%22%2C%22validity%22%3A%22DAY%22%7D%5D"
+
         shorts_html += f"""
-        <div class="bg-gray-800 border border-red-500 rounded-xl p-6 shadow-lg hover:shadow-2xl transition duration-300">
-            <div class="flex justify-between items-start mb-4">
-                <div>
-                    <span class="bg-red-900 text-red-300 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">SHORT SELL</span>
-                    <h3 class="text-2xl font-black text-white mt-2">{row['symbol']}</h3>
-                    <p class="text-xs text-gray-400 font-medium">{row['ticker']}</p>
+        <div class="bg-gray-800 border border-red-500 rounded-xl p-6 shadow-lg hover:shadow-2xl transition duration-300 flex flex-col justify-between">
+            <div>
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <span class="bg-red-900 text-red-300 text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">SHORT SELL</span>
+                        <h3 class="text-2xl font-black text-white mt-2">{row['symbol']}</h3>
+                        <p class="text-xs text-gray-400 font-medium">{row['ticker']} • Sector: <span class="text-indigo-300 font-bold">{row['sector']}</span></p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs text-gray-400 font-semibold block uppercase">Quant Score</span>
+                        <span class="text-3xl font-black text-red-400">{row['bear_score']}<span class="text-xs text-gray-500">/100</span></span>
+                    </div>
                 </div>
-                <div class="text-right">
-                    <span class="text-xs text-gray-400 font-semibold block uppercase">Quant Score</span>
-                    <span class="text-3xl font-black text-red-400">{row['bear_score']}<span class="text-xs text-gray-500">/100</span></span>
+                
+                <div class="grid grid-cols-2 gap-4 border-t border-b border-gray-700 py-3 my-4 text-sm text-gray-300">
+                    <div>
+                        <span class="text-gray-500 text-xs block uppercase">Close Price</span>
+                        <span class="font-bold text-lg text-white">₹{row['close']:,.2f}</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500 text-xs block uppercase">Avg Range (ATR%)</span>
+                        <span class="font-bold text-lg text-white">{row['atr_pct']:.2f}%</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500 text-xs block uppercase">Rel Volume (RVOL)</span>
+                        <span class="font-bold text-lg text-white">{row['rvol']:.2f}x</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500 text-xs block uppercase">RSI (14)</span>
+                        <span class="font-bold text-lg text-white">{row['rsi']:.1f}</span>
+                    </div>
+                </div>
+                
+                <div class="space-y-2 mb-6">
+                    <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
+                        <span class="text-red-400 font-bold uppercase">Trigger Entry (Below)</span>
+                        <span class="font-black text-white">₹{entry:,.2f}</span>
+                    </div>
+                    <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
+                        <span class="text-green-400 font-bold uppercase">Stop-Loss (SL)</span>
+                        <span class="font-black text-white" id="sl-short-{card_index}">₹{sl:,.2f}</span>
+                    </div>
+                    <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
+                        <span class="text-yellow-400 font-bold uppercase">Target 1 (1:1 R:R)</span>
+                        <span class="font-black text-white">₹{t1:,.2f}</span>
+                    </div>
+                    <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
+                        <span class="text-emerald-400 font-bold uppercase">Target 2 (2:1 R:R)</span>
+                        <span class="font-black text-white">₹{t2:,.2f}</span>
+                    </div>
                 </div>
             </div>
             
-            <div class="grid grid-cols-2 gap-4 border-t border-b border-gray-700 py-3 my-4 text-sm text-gray-300">
-                <div>
-                    <span class="text-gray-500 text-xs block uppercase">Close Price</span>
-                    <span class="font-bold text-lg text-white">₹{row['close']:,.2f}</span>
+            <!-- POSITION SIZING CALCULATOR -->
+            <div class="bg-slate-900 p-4 rounded-xl border border-indigo-500/20 my-4 text-xs">
+                <h4 class="font-black text-indigo-400 mb-2 uppercase tracking-wide flex items-center gap-1">
+                    <i class="fa-solid fa-calculator"></i> Smart Position Sizer
+                </h4>
+                <div class="grid grid-cols-2 gap-3 mb-3">
+                    <div>
+                        <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Trading Capital</label>
+                        <input type="number" id="capital-short-{card_index}" value="50000" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionShort({card_index}, {entry}, {sl})">
+                    </div>
+                    <div>
+                        <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Risk per Trade (%)</label>
+                        <input type="number" id="risk-short-{card_index}" value="1" step="0.5" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionShort({card_index}, {entry}, {sl})">
+                    </div>
                 </div>
-                <div>
-                    <span class="text-gray-500 text-xs block uppercase">Avg Range (ATR%)</span>
-                    <span class="font-bold text-lg text-white">{row['atr_pct']:.2f}%</span>
-                </div>
-                <div>
-                    <span class="text-gray-500 text-xs block uppercase">Rel Volume (RVOL)</span>
-                    <span class="font-bold text-lg text-white">{row['rvol']:.2f}x</span>
-                </div>
-                <div>
-                    <span class="text-gray-500 text-xs block uppercase">RSI (14)</span>
-                    <span class="font-bold text-lg text-white">{row['rsi']:.1f}</span>
-                </div>
-            </div>
-            
-            <div class="space-y-2 mb-6">
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
-                    <span class="text-red-400 font-bold uppercase">Trigger Entry (Below)</span>
-                    <span class="font-black text-white">₹{entry:,.2f}</span>
-                </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
-                    <span class="text-green-400 font-bold uppercase">Stop-Loss (SL)</span>
-                    <span class="font-black text-white">₹{sl:,.2f}</span>
-                </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
-                    <span class="text-yellow-400 font-bold uppercase">Target 1 (1:1 R:R)</span>
-                    <span class="font-black text-white">₹{t1:,.2f}</span>
-                </div>
-                <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
-                    <span class="text-emerald-400 font-bold uppercase">Target 2 (2:1 R:R)</span>
-                    <span class="font-black text-white">₹{t2:,.2f}</span>
+                <div class="bg-gray-950 p-2.5 rounded border border-gray-800 space-y-1 text-[11px] text-gray-300">
+                    <div class="flex justify-between">
+                        <span>Max Cash Risk:</span>
+                        <strong class="text-white" id="risk-cash-short-{card_index}">₹500.00</strong>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="font-bold text-red-400">Exact Quantity to Sell:</span>
+                        <strong class="text-red-400 text-sm font-black" id="qty-short-{card_index}">-- shares</strong>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Required Margin (5x MIS):</span>
+                        <strong class="text-indigo-300" id="margin-short-{card_index}">--</strong>
+                    </div>
                 </div>
             </div>
             
-            <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 text-xs text-gray-400">
+            <div class="bg-gray-900 p-3 rounded-lg border border-gray-700 text-xs text-gray-400 mb-4">
                 <div class="grid grid-cols-3 text-center gap-1">
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Pivot (P)</span>
@@ -343,6 +485,11 @@ def generate_dashboard():
                     </div>
                 </div>
             </div>
+            
+            <!-- SECURE DEEP-LINK BUTTON -->
+            <a href="{kite_url}" target="_blank" class="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-black text-center py-3 px-4 rounded-xl shadow-md transition duration-300 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-bolt"></i> Trade with Zerodha (Kite)
+            </a>
         </div>
         """
         
@@ -358,6 +505,7 @@ def generate_dashboard():
         leaderboard_html += f"""
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">{row['symbol']}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{row['sector']}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹{row['close']:,.2f}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{row['rsi']:.1f}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{row['rvol']:.2f}x</td>
@@ -434,6 +582,16 @@ def generate_dashboard():
                     <span class="flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> 15-Min ORB Trigger</span>
                     <span class="flex items-center gap-1.5"><i class="fa-solid fa-code text-pink-400"></i> Fully Automated</span>
                 </div>
+            </div>
+        </div>
+
+        <!-- SECTORAL MOMENTUM HEATMAP -->
+        <div class="mb-8">
+            <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-fire text-orange-500"></i> Sectoral Momentum Heatmap
+            </h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+                {sector_heatmap_html}
             </div>
         </div>
 
@@ -519,6 +677,7 @@ def generate_dashboard():
                     <thead class="bg-slate-950/60 text-gray-400 uppercase text-[10px] font-bold tracking-wider">
                         <tr>
                             <th scope="col" class="px-6 py-3 text-left">Symbol</th>
+                            <th scope="col" class="px-6 py-3 text-left">Sector</th>
                             <th scope="col" class="px-6 py-3 text-left">Close Price</th>
                             <th scope="col" class="px-6 py-3 text-left">RSI (14)</th>
                             <th scope="col" class="px-6 py-3 text-left">Rel Volume</th>
@@ -538,7 +697,7 @@ def generate_dashboard():
     </main>
 
     <footer class="max-w-7xl mx-auto px-4 text-center mt-12 text-xs text-slate-500 border-t border-slate-900 pt-6">
-        <p>© 2026 Quant Finder India. All market data fetched live from Yahoo Finance daily.</p>
+        <p>© 2026 Quant Finder India "Developed by Abhishek Mukherjee". All market data fetched live from Yahoo Finance daily.</p>
         <p class="mt-1">Designed with professional risk-to-reward parameters for Indian retail traders.</p>
     </footer>
 
@@ -546,7 +705,6 @@ def generate_dashboard():
         // IST CLOCK & MARKET STATUS
         function updateClock() {{
             const now = new Date();
-            // Convert to IST timezone
             const istOffset = 5.5 * 60 * 60 * 1000;
             const utc = now.getTime() + (now.getTimezoneOffset() * 60 * 1000);
             const istTime = new Date(utc + istOffset);
@@ -557,18 +715,17 @@ def generate_dashboard():
             
             document.getElementById('ist-clock').innerText = hours + ":" + minutes + ":" + seconds;
             
-            // Check Indian Stock Market Status (09:15 to 15:30, Monday to Friday)
-            const day = istTime.getDay(); // 0 is Sunday, 6 is Saturday
+            const day = istTime.getDay();
             const currentHour = istTime.getHours();
             const currentMin = istTime.getMinutes();
             const timeInMins = currentHour * 60 + currentMin;
             
             const badge = document.getElementById('market-state');
             if (day >= 1 && day <= 5) {{
-                if (timeInMins >= 555 && timeInMins < 930) {{ // 09:15 AM to 03:30 PM
+                if (timeInMins >= 555 && timeInMins < 930) {{
                     badge.innerText = "MARKET OPEN";
                     badge.className = "px-2 py-0.5 rounded text-[10px] font-black uppercase bg-emerald-950 text-emerald-400 border border-emerald-500/20";
-                }} else if (timeInMins >= 540 && timeInMins < 555) {{ // 09:00 AM to 09:15 AM
+                }} else if (timeInMins >= 540 && timeInMins < 555) {{
                     badge.innerText = "PRE-MARKET";
                     badge.className = "px-2 py-0.5 rounded text-[10px] font-black uppercase bg-yellow-950 text-yellow-400 border border-yellow-500/20";
                 }} else {{
@@ -583,6 +740,65 @@ def generate_dashboard():
         
         setInterval(updateClock, 1000);
         updateClock();
+
+        // POSITION SIZING CALCULATORS
+        function calculatePositionLong(index, entry, sl) {{
+            const capital = parseFloat(document.getElementById('capital-long-' + index).value) || 0;
+            const riskPct = parseFloat(document.getElementById('risk-long-' + index).value) || 0;
+            
+            const cashRisk = capital * (riskPct / 100);
+            const slPoints = entry - sl;
+            
+            let qty = 0;
+            let requiredMargin = "0.00";
+            
+            if (slPoints > 0) {{
+                qty = Math.floor(cashRisk / slPoints);
+                // MIS trades get 5x leverage from standard Indian brokers
+                requiredMargin = "₹" + ((qty * entry) / 5).toLocaleString('en-IN', {{ maximumFractionDigits: 2 }});
+            }}
+            
+            document.getElementById('risk-cash-long-' + index).innerText = "₹" + cashRisk.toLocaleString('en-IN', {{ maximumFractionDigits: 2 }});
+            document.getElementById('qty-long-' + index).innerText = qty + " shares";
+            document.getElementById('margin-long-' + index).innerText = requiredMargin;
+        }}
+        
+        function calculatePositionShort(index, entry, sl) {{
+            const capital = parseFloat(document.getElementById('capital-short-' + index).value) || 0;
+            const riskPct = parseFloat(document.getElementById('risk-short-' + index).value) || 0;
+            
+            const cashRisk = capital * (riskPct / 100);
+            const slPoints = sl - entry;
+            
+            let qty = 0;
+            let requiredMargin = "0.00";
+            
+            if (slPoints > 0) {{
+                qty = Math.floor(cashRisk / slPoints);
+                requiredMargin = "₹" + ((qty * entry) / 5).toLocaleString('en-IN', {{ maximumFractionDigits: 2 }});
+            }}
+            
+            document.getElementById('risk-cash-short-' + index).innerText = "₹" + cashRisk.toLocaleString('en-IN', {{ maximumFractionDigits: 2 }});
+            document.getElementById('qty-short-' + index).innerText = qty + " shares";
+            document.getElementById('margin-short-' + index).innerText = requiredMargin;
+        }}
+
+        // Run initial calculations on load
+        window.onload = function() {{
+            for (let i = 1; i <= 3; i++) {{
+                // Trigger calculators
+                const longCapitalInput = document.getElementById('capital-long-' + i);
+                if (longCapitalInput) {{
+                    longCapitalInput.dispatchEvent(new Event('input'));
+                }}
+            }}
+            for (let i = 4; i <= 6; i++) {{
+                const shortCapitalInput = document.getElementById('capital-short-' + i);
+                if (shortCapitalInput) {{
+                    shortCapitalInput.dispatchEvent(new Event('input'));
+                }}
+            }}
+        }}
 
         // LEADERBOARD FILTER SEARCH
         document.getElementById('search-box').addEventListener('keyup', function() {{
