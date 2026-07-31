@@ -67,8 +67,8 @@ def calculate_atr(df, period=14):
     return tr.rolling(window=period).mean()
 
 def generate_dashboard():
-    # --- STEP 1: SCAN NIFTY 50 STOCKS ---
-    print("Fetching Nifty 50 market data...")
+    # --- STEP 1: SCAN NIFTY 50 STOCKS (DAILY Watchlist) ---
+    print("Fetching Nifty 50 daily market data...")
     data_df = yf.download(NIFTY_50_TICKERS, period="3mo", interval="1d", group_by="ticker", progress=False)
     
     results = []
@@ -231,7 +231,102 @@ def generate_dashboard():
     target_date_str = longs['target_date'].iloc[0] if not longs.empty else df_all['target_date'].iloc[0]
     trading_date_str = longs['trading_date'].iloc[0] if not longs.empty else df_all['trading_date'].iloc[0]
     
-    # --- STEP 2: SCAN PENNY STOCKS FOR HIGH-VOLUME BREAKOUTS ---
+    # --- STEP 2: REAL-TIME INTRADAY BREAKOUT SCANNER (DURING MARKET HOURS) ---
+    print("Checking for live intraday breakouts...")
+    # Fetch 15-minute bars for today to find actual live breakouts of the first 15-minute range
+    intraday_data = yf.download(NIFTY_50_TICKERS, period="1d", interval="15m", group_by="ticker", progress=False)
+    
+    live_bullish_orb = []
+    live_bearish_orb = []
+    
+    for ticker in NIFTY_50_TICKERS:
+        try:
+            if ticker not in intraday_data.columns.levels[0]:
+                continue
+            df_i = intraday_data[ticker].copy().dropna(subset=['Close', 'Volume'])
+            if len(df_i) < 2:
+                # We need at least 2 rows (first row is 09:15-09:30 range; second row is breakout check)
+                continue
+                
+            if isinstance(df_i.columns, pd.MultiIndex):
+                df_i.columns = df_i.columns.get_level_values(0)
+                
+            # Range defined by first 15-minute candle
+            or_high = float(df_i['High'].iloc[0])
+            or_low = float(df_i['Low'].iloc[0])
+            
+            # Latest current price
+            current_price = float(df_i['Close'].iloc[-1])
+            vol_total = float(df_i['Volume'].sum())
+            
+            # Check Breakout Status
+            if current_price > or_high:
+                breakout_pct = ((current_price - or_high) / or_high) * 100
+                live_bullish_orb.append({
+                    'symbol': ticker.replace(".NS", ""),
+                    'or_high': or_high,
+                    'or_low': or_low,
+                    'current': current_price,
+                    'breakout_pct': breakout_pct,
+                    'volume': vol_total
+                })
+            elif current_price < or_low:
+                breakdown_pct = ((or_low - current_price) / or_low) * 100
+                live_bearish_orb.append({
+                    'symbol': ticker.replace(".NS", ""),
+                    'or_high': or_high,
+                    'or_low': or_low,
+                    'current': current_price,
+                    'breakdown_pct': breakdown_pct,
+                    'volume': vol_total
+                })
+        except Exception as e:
+            continue
+            
+    df_live_bull = pd.DataFrame(live_bullish_orb)
+    df_live_bear = pd.DataFrame(live_bearish_orb)
+    
+    # Pick Top 3 live bullish & bearish breakouts sorted by breakout magnitude
+    top_live_bulls = df_live_bull.sort_values(by='breakout_pct', ascending=False).head(3) if not df_live_bull.empty else pd.DataFrame()
+    top_live_bears = df_live_bear.sort_values(by='breakdown_pct', ascending=False).head(3) if not df_live_bear.empty else pd.DataFrame()
+
+    # --- STEP 3: BANK NIFTY WEEKLY & DAILY CORE ANALYSIS ---
+    print("Analyzing Bank Nifty indices...")
+    bn_daily = yf.download("^NSEBANK", period="3mo", interval="1d", progress=False)
+    bn_weekly = yf.download("^NSEBANK", period="1y", interval="1wk", progress=False)
+    
+    if isinstance(bn_daily.columns, pd.MultiIndex):
+        bn_daily.columns = bn_daily.columns.get_level_values(0)
+    if isinstance(bn_weekly.columns, pd.MultiIndex):
+        bn_weekly.columns = bn_weekly.columns.get_level_values(0)
+        
+    bn_daily = bn_daily.dropna()
+    bn_weekly = bn_weekly.dropna()
+    
+    # Daily Trend
+    bn_daily['EMA_20'] = bn_daily['Close'].ewm(span=20, adjust=False).mean()
+    latest_bn_close = float(bn_daily['Close'].iloc[-1])
+    latest_bn_ema = float(bn_daily['EMA_20'].iloc[-1])
+    daily_bias = "🟢 BULLISH" if latest_bn_close > latest_bn_ema else "🔴 BEARISH"
+    
+    # Weekly Trend
+    bn_weekly['EMA_20'] = bn_weekly['Close'].ewm(span=20, adjust=False).mean()
+    latest_bn_w_close = float(bn_weekly['Close'].iloc[-1])
+    latest_bn_w_ema = float(bn_weekly['EMA_20'].iloc[-1])
+    weekly_bias = "🟢 BULLISH" if latest_bn_w_close > latest_bn_w_ema else "🔴 BEARISH"
+    
+    # Daily Pivots based on completed daily candle
+    bn_high = float(bn_daily['High'].iloc[-2 if bn_daily.index[-1].strftime('%Y-%m-%d') == today_str else -1])
+    bn_low = float(bn_daily['Low'].iloc[-2 if bn_daily.index[-1].strftime('%Y-%m-%d') == today_str else -1])
+    bn_close = float(bn_daily['Close'].iloc[-2 if bn_daily.index[-1].strftime('%Y-%m-%d') == today_str else -1])
+    
+    bn_pivot = (bn_high + bn_low + bn_close) / 3
+    bn_r1 = (2 * bn_pivot) - bn_low
+    bn_s1 = (2 * bn_pivot) - bn_high
+    bn_r2 = bn_pivot + (bn_high - bn_low)
+    bn_s2 = bn_pivot - (bn_high - bn_low)
+    
+    # --- STEP 4: SCAN PENNY STOCKS ---
     print("Scanning potential penny stocks...")
     penny_df = yf.download(PENNY_STOCK_TICKERS, period="1mo", interval="1d", group_by="ticker", progress=False)
     penny_results = []
@@ -246,7 +341,6 @@ def generate_dashboard():
             if isinstance(df_p.columns, pd.MultiIndex):
                 df_p.columns = df_p.columns.get_level_values(0)
                 
-            # Read completed index (using same rules)
             today_str = datetime.date.today().strftime('%Y-%m-%d')
             if df_p.index[-1].strftime('%Y-%m-%d') == today_str:
                 analysis_idx = -2
@@ -257,15 +351,12 @@ def generate_dashboard():
             close_p = float(row_p['Close'])
             vol_p = float(row_p['Volume'])
             
-            # Simple technical calculations
             avg_vol_20 = df_p['Volume'].rolling(window=15).mean().iloc[analysis_idx]
             rvol_p = vol_p / (avg_vol_20 + 1e-10)
             
             prev_close_p = float(df_p['Close'].iloc[analysis_idx - 1])
             change_p = ((close_p - prev_close_p) / prev_close_p) * 100
             
-            # Filter criteria: Price under ₹100, showing positive momentum and high volume spike
-            # RVOL > 1.2 indicates accumulation. High volume breakout is the #1 signal a stock is going to hit an upper circuit!
             if 1.0 <= close_p <= 100.0 and rvol_p >= 1.2:
                 penny_results.append({
                     'ticker': ticker,
@@ -275,18 +366,16 @@ def generate_dashboard():
                     'change_pct': change_p,
                 })
         except Exception as e:
-            print(f"Error scanning penny ticker {ticker}: {e}")
             continue
             
     df_penny_results = pd.DataFrame(penny_results)
     if not df_penny_results.empty:
-        # Sort by Volume spike and Daily percentage return to find potential "Circuit Candidates"
         top_penny_stocks = df_penny_results.sort_values(by=['rvol', 'change_pct'], ascending=False).head(5)
     else:
         top_penny_stocks = pd.DataFrame()
         
-    # --- STEP 3: BUILD HTML ---
-    # Generate HTML Sector Heatmap Cards
+    # --- STEP 5: TEMPLATE THE DASHBOARD ---
+    # Sectoral Heatmap Cards
     sector_heatmap_html = ""
     for sect, perf in sector_perf.items():
         perf_color = "text-green-400" if perf >= 0 else "text-red-400"
@@ -306,6 +395,72 @@ def generate_dashboard():
             </div>
         </div>
         """
+        
+    # Generate Live 15-Min ORB HTML lists
+    live_breakouts_html = ""
+    if top_live_bulls.empty and top_live_bears.empty:
+        live_breakouts_html = """
+        <div class="col-span-full bg-slate-900/40 rounded-xl p-6 border border-slate-800 text-center text-xs text-gray-400">
+            <i class="fa-solid fa-hourglass-start text-yellow-500 text-lg mb-2"></i><br>
+            <strong>Waiting for regular market hours...</strong><br>
+            During trading sessions (09:15 AM - 03:30 PM IST), this panel scans active 15-minute bars and lists Nifty 50 stocks breaking their Opening Range in real-time!
+        </div>
+        """
+    else:
+        # Render live breakout tables
+        live_breakouts_html = '<div class="grid grid-cols-1 md:grid-cols-2 gap-6 col-span-full">'
+        
+        # Bullish ORB List
+        live_breakouts_html += """
+        <div class="bg-slate-900/60 border border-green-500/20 rounded-2xl p-5 shadow">
+            <h4 class="text-green-400 font-bold text-sm mb-4 flex items-center gap-2 uppercase tracking-wider">
+                <i class="fa-solid fa-circle-arrow-up text-lg"></i> Live Bullish ORB Breakouts (Above 15m High)
+            </h4>
+            <div class="space-y-3">
+        """
+        if top_live_bulls.empty:
+            live_breakouts_html += '<p class="text-xs text-gray-500 italic">No active bullish breakouts detected at this moment.</p>'
+        else:
+            for idx, row in top_live_bulls.iterrows():
+                live_breakouts_html += f"""
+                <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
+                    <div>
+                        <strong class="text-white text-sm block">{row['symbol']}</strong>
+                        <span class="text-gray-400">Range: ₹{row['or_low']:.1f} - ₹{row['or_high']:.1f}</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-green-400 font-black block text-sm">₹{row['current']:.2f}</span>
+                        <span class="text-green-500 font-bold bg-green-950 px-2 py-0.5 rounded text-[10px] uppercase">+{row['breakout_pct']:.2f}% Breakout</span>
+                    </div>
+                </div>
+                """
+        live_breakouts_html += '</div></div>'
+        
+        # Bearish ORB List
+        live_breakouts_html += """
+        <div class="bg-slate-900/60 border border-red-500/20 rounded-2xl p-5 shadow">
+            <h4 class="text-red-400 font-bold text-sm mb-4 flex items-center gap-2 uppercase tracking-wider">
+                <i class="fa-solid fa-circle-arrow-down text-lg"></i> Live Bearish ORB Breakdown (Below 15m Low)
+            </h4>
+            <div class="space-y-3">
+        """
+        if top_live_bears.empty:
+            live_breakouts_html += '<p class="text-xs text-gray-500 italic">No active bearish breakdowns detected at this moment.</p>'
+        else:
+            for idx, row in top_live_bears.iterrows():
+                live_breakouts_html += f"""
+                <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
+                    <div>
+                        <strong class="text-white text-sm block">{row['symbol']}</strong>
+                        <span class="text-gray-400">Range: ₹{row['or_low']:.1f} - ₹{row['or_high']:.1f}</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-red-400 font-black block text-sm">₹{row['current']:.2f}</span>
+                        <span class="text-red-500 font-bold bg-red-950 px-2 py-0.5 rounded text-[10px] uppercase">+{row['breakdown_pct']:.2f}% Breakdown</span>
+                    </div>
+                </div>
+                """
+        live_breakouts_html += '</div></div></div>'
         
     # Generate HTML Cards for Bullish long candidates (Without Kite Buttons)
     longs_html = ""
@@ -548,8 +703,6 @@ def generate_dashboard():
             perf = row['change_pct']
             color = "text-green-400" if perf >= 0 else "text-red-400"
             symbol_sign = "+" if perf >= 0 else ""
-            
-            # Simple assessment of why it's a breakout
             alert_reason = "🔥 Volume Spike" if row['rvol'] >= 3.0 else "⚡ Momentum Breakout" if perf >= 4.0 else "📈 Steady Accumulation"
             
             penny_cards_html += f"""
@@ -666,6 +819,143 @@ def generate_dashboard():
                     <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-emerald-400"></i> Risk-to-Reward Optimized</span>
                     <span class="flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> 15-Min ORB Trigger</span>
                     <span class="flex items-center gap-1.5"><i class="fa-solid fa-code text-pink-400"></i> Fully Automated</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TWO COLUMN LAYOUT: LIVE BREAKOUTS & PRE-MARKET STRATEGY -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+            
+            <!-- COLUMN 1 & 2: LIVE BREAKOUTS TRACKER (UPDATED IN REAL-TIME DURING MARKET HOURS) -->
+            <div class="lg:col-span-2 bg-slate-950/40 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="text-lg font-black text-white flex items-center gap-2">
+                            <i class="fa-solid fa-tower-broadcast text-indigo-400 animate-pulse"></i> Live Intraday Breakout Tracker
+                        </h3>
+                        <span class="text-[9px] text-emerald-400 font-extrabold bg-emerald-950/60 border border-emerald-500/20 px-2 py-0.5 rounded-full uppercase tracking-widest">
+                            Live 15m ORB Feed
+                        </span>
+                    </div>
+                    <p class="text-xs text-gray-400 mb-4">
+                        This panel monitors live 15-minute price bars. The moment any Nifty 50 stock breaks above or below its first 15-minute candle range (09:15 - 09:30 AM), it is tracked here as an active momentum trade.
+                    </p>
+                    <div class="grid grid-cols-1 gap-4">
+                        {live_breakouts_html}
+                    </div>
+                </div>
+                <div class="mt-4 text-[10px] text-gray-500 italic flex items-center gap-1.5 border-t border-gray-800/60 pt-3">
+                    <i class="fa-solid fa-rotate text-indigo-400"></i> Run a manual scan in GitHub Actions during market hours to refresh this live list!
+                </div>
+            </div>
+
+            <!-- COLUMN 3: PRE-MARKET ACTION GUIDE (PRIOR TO OPEN) -->
+            <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                <h3 class="text-lg font-black text-white flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-bullhorn text-amber-400"></i> Pre-Market Strategy (09:08 AM)
+                </h3>
+                <p class="text-xs text-gray-400 mb-4">
+                    Prior to market open, follow these instructions to align our quant picks with the actual market gap openings:
+                </p>
+                <div class="space-y-3 text-xs">
+                    <div class="bg-slate-950/60 p-3 rounded-lg border border-gray-800">
+                        <strong class="text-amber-400 font-bold block mb-1">1. Check NSE Pre-Open Page</strong>
+                        <p class="text-gray-400 text-[11px] mb-2">At 09:08 AM IST, open the official NSE pre-open web terminal to see where all stocks are opening:</p>
+                        <a href="https://www.nseindia.com/market-data/pre-open-market-equity-and-sme" target="_blank" class="bg-indigo-900 hover:bg-indigo-800 text-white font-extrabold text-[10px] px-3 py-1.5 rounded uppercase tracking-wider inline-block">
+                            <i class="fa-solid fa-square-arrow-up-right mr-1"></i> Open NSE Pre-Open
+                        </a>
+                    </div>
+                    <div class="bg-slate-950/60 p-3 rounded-lg border border-gray-800">
+                        <strong class="text-white block mb-1">2. Align Gaps with Quant Picks</strong>
+                        <p class="text-gray-400 text-[11px]">Compare the top gap-up stocks on NSE with our <strong>3 Bullish Long Picks</strong>. If our picks are also gapping up with high pre-open volume, it is a massive confirmation signal!</p>
+                    </div>
+                    <div class="bg-slate-950/60 p-3 rounded-lg border border-gray-800">
+                        <strong class="text-white block mb-1">3. Index Gap Rule</strong>
+                        <p class="text-gray-400 text-[11px]">If Nifty 50 Index opens with a large gap up of >0.5%, avoid shorting and trade only longs. If it gaps down >0.5%, trade only shorts.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BANK NIFTY CORE WEEKLY & DAILY HUB -->
+        <div class="mb-8 bg-gradient-to-r from-slate-950 via-indigo-950 to-slate-950 rounded-2xl p-6 border border-indigo-500/20 shadow-xl">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-800 pb-4 mb-4 gap-4">
+                <div>
+                    <h3 class="text-xl font-black text-white flex items-center gap-2">
+                        <i class="fa-solid fa-building-columns text-indigo-400"></i> Bank Nifty Weekly & Daily Core Hub
+                    </h3>
+                    <p class="text-xs text-gray-400 mt-1">
+                        Comprehensive mathematical trend tracking for Nifty Bank index (^NSEBANK). Updated daily to give precise pivot supports and trend biases.
+                    </p>
+                </div>
+                <div class="flex gap-3">
+                    <div class="bg-slate-900 border border-gray-800 rounded-lg px-3 py-1.5 text-xs text-center">
+                        <span class="text-gray-500 block text-[9px] uppercase font-bold">Daily Bias</span>
+                        <strong class="text-white font-black">{daily_bias}</strong>
+                    </div>
+                    <div class="bg-slate-900 border border-gray-800 rounded-lg px-3 py-1.5 text-xs text-center">
+                        <span class="text-gray-500 block text-[9px] uppercase font-bold">Weekly Bias</span>
+                        <strong class="text-white font-black">{weekly_bias}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-300">
+                <!-- Daily Statistics -->
+                <div class="bg-slate-900/60 p-4 rounded-xl border border-gray-800">
+                    <h4 class="font-extrabold text-white mb-3 text-xs uppercase text-indigo-300 tracking-wider">
+                        <i class="fa-solid fa-calculator mr-1"></i> Technical Standings
+                    </h4>
+                    <ul class="space-y-2 text-xs">
+                        <li class="flex justify-between border-b border-gray-800/40 pb-1.5">
+                            <span class="text-gray-400">Bank Nifty Close:</span>
+                            <strong class="text-white">₹{latest_bn_close:,.2f}</strong>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-800/40 pb-1.5">
+                            <span class="text-gray-400">Daily 20 EMA:</span>
+                            <strong class="text-white">₹{latest_bn_ema:,.2f}</strong>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-800/40 pb-1.5">
+                            <span class="text-gray-400">Weekly Close:</span>
+                            <strong class="text-white">₹{latest_bn_w_close:,.2f}</strong>
+                        </li>
+                        <li class="flex justify-between">
+                            <span class="text-gray-400">Weekly 20 EMA:</span>
+                            <strong class="text-white">₹{latest_bn_w_ema:,.2f}</strong>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Daily Classical Pivot Levels -->
+                <div class="bg-slate-900/60 p-4 rounded-xl border border-gray-800 col-span-2">
+                    <h4 class="font-extrabold text-white mb-3 text-xs uppercase text-indigo-300 tracking-wider">
+                        <i class="fa-solid fa-list-check mr-1"></i> Bank Nifty Daily Pivot Point Levels (₹)
+                    </h4>
+                    <div class="grid grid-cols-5 text-center text-xs gap-2">
+                        <div class="bg-red-950/40 border border-red-500/20 p-2 rounded">
+                            <span class="text-red-400 font-extrabold block text-[10px]">R2</span>
+                            <strong class="text-white font-black">{bn_r2:,.1f}</strong>
+                        </div>
+                        <div class="bg-red-950/20 border border-red-500/10 p-2 rounded">
+                            <span class="text-red-300 font-extrabold block text-[10px]">R1</span>
+                            <strong class="text-white font-semibold">{bn_r1:,.1f}</strong>
+                        </div>
+                        <div class="bg-slate-950 border border-gray-800 p-2 rounded">
+                            <span class="text-gray-400 font-extrabold block text-[10px]">PIVOT</span>
+                            <strong class="text-white font-bold">{bn_pivot:,.1f}</strong>
+                        </div>
+                        <div class="bg-green-950/20 border border-green-500/10 p-2 rounded">
+                            <span class="text-green-300 font-extrabold block text-[10px]">S1</span>
+                            <strong class="text-white font-semibold">{bn_s1:,.1f}</strong>
+                        </div>
+                        <div class="bg-green-950/40 border border-green-500/20 p-2 rounded">
+                            <span class="text-green-400 font-extrabold block text-[10px]">S2</span>
+                            <strong class="text-white font-black">{bn_s2:,.1f}</strong>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-gray-500 mt-3 text-center">
+                        <i class="fa-solid fa-circle-info"></i> These pivots are calculated based on yesterday's completed index high, low, and close, providing institutional support/resistance benchmarks.
+                    </p>
                 </div>
             </div>
         </div>
@@ -810,8 +1100,8 @@ def generate_dashboard():
     </main>
 
     <footer class="max-w-7xl mx-auto px-4 text-center mt-12 text-xs text-slate-500 border-t border-slate-900 pt-6">
-        <p>© 2026 Quant Finder India "Developed by Abhishek Mukherjee". All market data fetched live from Yahoo Finance daily.</p>
-        <p class="mt-1">Designed with professional risk-to-reward parameters for Indian retail traders.</p>
+        <p>© 2026 Quant Finder India. All market data fetched live from Yahoo Finance daily.</p>
+        <p class="mt-1 font-bold text-gray-400">Disclaimer: All content on this site is for educational purposes only; stock trading involves significant market risk, and you should consult a SEBI-registered financial advisor before making any investment decisions.</p>
     </footer>
 
     <script>
@@ -867,7 +1157,6 @@ def generate_dashboard():
             
             if (slPoints > 0) {{
                 qty = Math.floor(cashRisk / slPoints);
-                // MIS trades get 5x leverage from standard Indian brokers
                 requiredMargin = "₹" + ((qty * entry) / 5).toLocaleString('en-IN', {{ maximumFractionDigits: 2 }});
             }}
             
@@ -899,7 +1188,6 @@ def generate_dashboard():
         // Run initial calculations on load
         window.onload = function() {{
             for (let i = 1; i <= 3; i++) {{
-                // Trigger calculators
                 const longCapitalInput = document.getElementById('capital-long-' + i);
                 if (longCapitalInput) {{
                     longCapitalInput.dispatchEvent(new Event('input'));
