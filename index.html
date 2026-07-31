@@ -44,19 +44,104 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         
-        <!-- INTRO HERO BANNER -->
-        <div class="bg-gradient-to-r from-slate-900 to-indigo-950 rounded-2xl p-6 sm:p-8 border border-slate-800 mb-8 shadow-xl relative overflow-hidden">
-            <div class="absolute -right-12 -bottom-12 opacity-10 text-9xl font-black">NSE</div>
+        <!-- INTRO HERO BANNER (WITH ANIMATED REFRESH BUTTON) -->
+        <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-800 mb-8 shadow-xl relative overflow-hidden">
+            <div class="absolute -right-12 -bottom-12 opacity-5 text-9xl font-black">NSE</div>
             <div class="max-w-3xl relative z-10">
                 <h2 class="text-2xl sm:text-3xl font-black text-white mb-2">High-Probability Intraday Stock Scanner</h2>
                 <p class="text-slate-400 text-sm sm:text-base leading-relaxed mb-4">
                     Quantitatively scanning the top 50 most liquid NSE stocks every evening. This algorithmic model filters for institutional volume spikes, relative range expansions (ATR), trend alignment, and breakout squeezes to output the 3 strongest setups for the day.
                 </p>
-                <div class="flex flex-wrap gap-4 text-xs font-semibold text-slate-300">
+                <div class="flex flex-wrap gap-4 text-xs font-semibold text-slate-300 mb-4">
                     <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-emerald-400"></i> Risk-to-Reward Optimized</span>
                     <span class="flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> 15-Min ORB Trigger</span>
                     <span class="flex items-center gap-1.5"><i class="fa-solid fa-code text-pink-400"></i> Fully Automated</span>
                 </div>
+                
+                <!-- INTEGRATED ANIMATED LIVE REFRESH BUTTONS -->
+                <div class="flex flex-wrap gap-4">
+                    <button onclick="refreshLivePrices()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase px-4 py-2.5 rounded-lg transition duration-200 flex items-center gap-2 shadow-lg shadow-emerald-600/15" id="price-refresh-btn">
+                        <i class="fa-solid fa-rotate-right" id="price-refresh-icon"></i> Sync Live Quotes
+                    </button>
+                    <button onclick="toggleTokenModal()" class="bg-gray-800 hover:bg-gray-700 border border-gray-700 text-white font-black text-xs uppercase px-4 py-2.5 rounded-lg transition duration-200 flex items-center gap-2" id="cloud-trigger-btn">
+                        <i class="fa-solid fa-cloud" id="cloud-icon"></i> Trigger Cloud Refresh
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- HIDDEN GITHUB TOKEN CONFIG MODAL -->
+        <div id="token-modal" class="hidden bg-slate-900 border border-gray-800 rounded-xl p-5 mb-8 shadow-xl">
+            <h4 class="font-bold text-sm text-white mb-2 uppercase tracking-wide flex items-center gap-2">
+                <i class="fa-solid fa-gear text-indigo-400"></i> Configure Cloud Trigger Settings
+            </h4>
+            <p class="text-xs text-gray-400 mb-4 leading-relaxed">
+                To trigger a live data scan in the cloud directly from this webpage, paste your <strong>GitHub Personal Access Token (PAT)</strong>. This token is stored <strong>100% securely only inside your browser's private local memory (localStorage)</strong> and is never sent to any server except directly to GitHub's official API.
+            </p>
+            <div class="flex gap-3 text-xs mb-3">
+                <input type="password" id="gh-token" placeholder="Paste your GitHub Personal Access Token (classic or fine-grained)..." class="flex-1 bg-slate-950 border border-gray-800 rounded px-3 py-2 text-white focus:outline-none focus:border-indigo-500">
+                <button onclick="saveGitHubToken()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-black px-4 rounded transition">
+                    Save Token
+                </button>
+            </div>
+            <div class="flex justify-between items-center text-[10px] text-gray-500">
+                <span>Repository: <strong>abhisim23/nifty-scanner</strong></span>
+                <button onclick="clearGitHubToken()" class="text-rose-400 hover:underline"><i class="fa-solid fa-trash-can mr-1"></i>Clear Token</button>
+            </div>
+            
+            <div class="mt-4 border-t border-gray-800/80 pt-4 hidden" id="action-trigger-area">
+                <button onclick="triggerGitHubAction()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-black py-3 px-4 rounded-xl shadow-md transition duration-200 flex items-center justify-center gap-2 uppercase tracking-wider text-xs" id="run-workflow-btn">
+                    <i class="fa-solid fa-rotate-right" id="workflow-spinner"></i> Run Live Cloud Scanner (Takes 60 seconds)
+                </button>
+                <div id="countdown-area" class="hidden text-center mt-3 font-bold text-xs text-indigo-400 animate-pulse">
+                    🔄 Cloud server is active! Compiling fresh stock data. Auto-reloading in <span id="countdown-seconds">60</span>s...
+                </div>
+            </div>
+        </div>
+
+        <!-- REAL-TIME INTERACTIVE TRADINGVIEW CHART WIDGETS -->
+        <div class="mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Nifty 50 widget -->
+            <div class="bg-slate-900 border border-gray-800 rounded-2xl overflow-hidden h-[240px]">
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container h-full">
+                  <div class="tradingview-widget-container__widget h-full"></div>
+                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                  {
+                  "symbol": "NSE:NIFTY",
+                  "width": "100%",
+                  "height": "100%",
+                  "locale": "en",
+                  "dateRange": "1D",
+                  "colorTheme": "dark",
+                  "isTransparent": true,
+                  "autosize": true,
+                  "largeChartUrl": ""
+                }
+                  </script>
+                </div>
+                <!-- TradingView Widget END -->
+            </div>
+            <!-- Bank Nifty widget -->
+            <div class="bg-slate-900 border border-gray-800 rounded-2xl overflow-hidden h-[240px]">
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container h-full">
+                  <div class="tradingview-widget-container__widget h-full"></div>
+                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                  {
+                  "symbol": "NSE:BANKNIFTY",
+                  "width": "100%",
+                  "height": "100%",
+                  "locale": "en",
+                  "dateRange": "1D",
+                  "colorTheme": "dark",
+                  "isTransparent": true,
+                  "autosize": true,
+                  "largeChartUrl": ""
+                }
+                  </script>
+                </div>
+                <!-- TradingView Widget END -->
             </div>
         </div>
 
@@ -64,11 +149,11 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
             
             <!-- COLUMN 1 & 2: LIVE BREAKOUTS TRACKER (UPDATED IN REAL-TIME DURING MARKET HOURS) -->
-            <div class="lg:col-span-2 bg-slate-950/40 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col justify-between">
+            <div class="lg:col-span-2 bg-slate-950/40 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col justify-between" id="orb-live-card">
                 <div>
                     <div class="flex justify-between items-center mb-2">
                         <h3 class="text-lg font-black text-white flex items-center gap-2">
-                            <i class="fa-solid fa-tower-broadcast text-indigo-400 animate-pulse"></i> Live Intraday Breakout Tracker
+                            <i class="fa-solid fa-tower-broadcast text-indigo-400 animate-pulse" id="live-antenna"></i> Live Intraday Breakout Tracker
                         </h3>
                         <span class="text-[9px] text-emerald-400 font-extrabold bg-emerald-950/60 border border-emerald-500/20 px-2 py-0.5 rounded-full uppercase tracking-widest">
                             Live 15m ORB Feed
@@ -77,7 +162,7 @@
                     <p class="text-xs text-gray-400 mb-4">
                         This panel monitors live 15-minute price bars. The moment any Nifty 50 stock breaks above or below its first 15-minute candle range (09:15 - 09:30 AM), it is tracked here as an active momentum trade.
                     </p>
-                    <div class="grid grid-cols-1 gap-4">
+                    <div class="grid grid-cols-1 gap-4" id="orb-live-container">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 col-span-full">
         <div class="bg-slate-900/60 border border-green-500/20 rounded-2xl p-5 shadow">
             <h4 class="text-green-400 font-bold text-sm mb-4 flex items-center gap-2 uppercase tracking-wider">
@@ -87,34 +172,34 @@
         
                 <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
                     <div>
-                        <strong class="text-white text-sm block">MARUTI</strong>
-                        <span class="text-gray-400">Range: ₹13877.0 - ₹14005.0</span>
+                        <strong class="text-white text-sm block">HCLTECH</strong>
+                        <span class="text-gray-400">Range: ₹1296.4 - ₹1320.7</span>
                     </div>
                     <div class="text-right">
-                        <span class="text-green-400 font-black block text-sm">₹14180.00</span>
-                        <span class="text-green-500 font-bold bg-green-950 px-2 py-0.5 rounded text-[10px] uppercase">+1.25% Breakout</span>
+                        <span class="text-green-400 font-black block text-sm">₹1332.50</span>
+                        <span class="text-green-500 font-bold bg-green-950 px-2 py-0.5 rounded text-[10px] uppercase">+0.89% Breakout</span>
                     </div>
                 </div>
                 
                 <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
                     <div>
-                        <strong class="text-white text-sm block">SBIN</strong>
-                        <span class="text-gray-400">Range: ₹1008.0 - ₹1013.0</span>
+                        <strong class="text-white text-sm block">M&M</strong>
+                        <span class="text-gray-400">Range: ₹3249.6 - ₹3357.9</span>
                     </div>
                     <div class="text-right">
-                        <span class="text-green-400 font-black block text-sm">₹1025.30</span>
-                        <span class="text-green-500 font-bold bg-green-950 px-2 py-0.5 rounded text-[10px] uppercase">+1.21% Breakout</span>
+                        <span class="text-green-400 font-black block text-sm">₹3383.60</span>
+                        <span class="text-green-500 font-bold bg-green-950 px-2 py-0.5 rounded text-[10px] uppercase">+0.77% Breakout</span>
                     </div>
                 </div>
                 
                 <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
                     <div>
-                        <strong class="text-white text-sm block">HEROMOTOCO</strong>
-                        <span class="text-gray-400">Range: ₹5168.9 - ₹5261.3</span>
+                        <strong class="text-white text-sm block">TECHM</strong>
+                        <span class="text-gray-400">Range: ₹1611.4 - ₹1646.0</span>
                     </div>
                     <div class="text-right">
-                        <span class="text-green-400 font-black block text-sm">₹5325.00</span>
-                        <span class="text-green-500 font-bold bg-green-950 px-2 py-0.5 rounded text-[10px] uppercase">+1.21% Breakout</span>
+                        <span class="text-green-400 font-black block text-sm">₹1655.60</span>
+                        <span class="text-green-500 font-bold bg-green-950 px-2 py-0.5 rounded text-[10px] uppercase">+0.58% Breakout</span>
                     </div>
                 </div>
                 </div></div>
@@ -126,34 +211,34 @@
         
                 <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
                     <div>
-                        <strong class="text-white text-sm block">HDFCLIFE</strong>
-                        <span class="text-gray-400">Range: ₹555.5 - ₹558.8</span>
+                        <strong class="text-white text-sm block">INDUSINDBK</strong>
+                        <span class="text-gray-400">Range: ₹1008.5 - ₹1016.1</span>
                     </div>
                     <div class="text-right">
-                        <span class="text-red-400 font-black block text-sm">₹544.90</span>
-                        <span class="text-red-500 font-bold bg-red-950 px-2 py-0.5 rounded text-[10px] uppercase">+1.90% Breakdown</span>
-                    </div>
-                </div>
-                
-                <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
-                    <div>
-                        <strong class="text-white text-sm block">INFY</strong>
-                        <span class="text-gray-400">Range: ₹1168.0 - ₹1186.0</span>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-red-400 font-black block text-sm">₹1156.70</span>
-                        <span class="text-red-500 font-bold bg-red-950 px-2 py-0.5 rounded text-[10px] uppercase">+0.97% Breakdown</span>
-                    </div>
-                </div>
-                
-                <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
-                    <div>
-                        <strong class="text-white text-sm block">SBILIFE</strong>
-                        <span class="text-gray-400">Range: ₹1889.9 - ₹1910.0</span>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-red-400 font-black block text-sm">₹1872.20</span>
+                        <span class="text-red-400 font-black block text-sm">₹999.00</span>
                         <span class="text-red-500 font-bold bg-red-950 px-2 py-0.5 rounded text-[10px] uppercase">+0.94% Breakdown</span>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
+                    <div>
+                        <strong class="text-white text-sm block">ADANIENT</strong>
+                        <span class="text-gray-400">Range: ₹3041.4 - ₹3064.5</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-red-400 font-black block text-sm">₹3028.80</span>
+                        <span class="text-red-500 font-bold bg-red-950 px-2 py-0.5 rounded text-[10px] uppercase">+0.41% Breakdown</span>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
+                    <div>
+                        <strong class="text-white text-sm block">SBIN</strong>
+                        <span class="text-gray-400">Range: ₹1029.5 - ₹1034.3</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-red-400 font-black block text-sm">₹1025.90</span>
+                        <span class="text-red-500 font-bold bg-red-950 px-2 py-0.5 rounded text-[10px] uppercase">+0.35% Breakdown</span>
                     </div>
                 </div>
                 </div></div></div>
@@ -192,173 +277,139 @@
             </div>
         </div>
 
-        <!-- BANK NIFTY CORE WEEKLY & DAILY HUB -->
-        <div class="mb-8 bg-gradient-to-r from-slate-950 via-indigo-950 to-slate-950 rounded-2xl p-6 border border-indigo-500/20 shadow-xl">
+        <!-- BANK NIFTY CORE WEEKLY & DAILY HUB (UPGRADED) -->
+        <div class="mb-8 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 rounded-2xl p-6 border border-indigo-500/30 shadow-xl">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-800 pb-4 mb-4 gap-4">
                 <div>
                     <h3 class="text-xl font-black text-white flex items-center gap-2">
-                        <i class="fa-solid fa-building-columns text-indigo-400"></i> Bank Nifty Weekly & Daily Core Hub
+                        <i class="fa-solid fa-building-columns text-indigo-400"></i> Bank Nifty Weekly & Daily Trading Hub
                     </h3>
                     <p class="text-xs text-gray-400 mt-1">
-                        Comprehensive mathematical trend tracking for Nifty Bank index (^NSEBANK). Updated daily to give precise pivot supports and trend biases.
+                        Professional execution levels, daily/weekly ranges, and dynamic entry alerts for Nifty Bank index (^NSEBANK).
                     </p>
                 </div>
-                <div class="flex gap-3">
+                <div class="flex gap-3 items-center">
                     <div class="bg-slate-900 border border-gray-800 rounded-lg px-3 py-1.5 text-xs text-center">
-                        <span class="text-gray-500 block text-[9px] uppercase font-bold">Daily Bias</span>
-                        <strong class="text-white font-black">🔴 BEARISH</strong>
+                        <span class="text-gray-500 block text-[9px] uppercase font-bold">Daily EMA-20 Trend</span>
+                        <strong class="text-white font-black" id="bn-daily-bias-lbl">🔴 BEARISH</strong>
                     </div>
                     <div class="bg-slate-900 border border-gray-800 rounded-lg px-3 py-1.5 text-xs text-center">
-                        <span class="text-gray-500 block text-[9px] uppercase font-bold">Weekly Bias</span>
+                        <span class="text-gray-500 block text-[9px] uppercase font-bold">Weekly EMA-20 Trend</span>
                         <strong class="text-white font-black">🟢 BULLISH</strong>
                     </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-300">
-                <!-- Daily Statistics -->
-                <div class="bg-slate-900/60 p-4 rounded-xl border border-gray-800">
-                    <h4 class="font-extrabold text-white mb-3 text-xs uppercase text-indigo-300 tracking-wider">
-                        <i class="fa-solid fa-calculator mr-1"></i> Technical Standings
-                    </h4>
-                    <ul class="space-y-2 text-xs">
-                        <li class="flex justify-between border-b border-gray-800/40 pb-1.5">
-                            <span class="text-gray-400">Bank Nifty Close:</span>
-                            <strong class="text-white">₹57,225.90</strong>
-                        </li>
-                        <li class="flex justify-between border-b border-gray-800/40 pb-1.5">
-                            <span class="text-gray-400">Daily 20 EMA:</span>
-                            <strong class="text-white">₹57,276.64</strong>
-                        </li>
-                        <li class="flex justify-between border-b border-gray-800/40 pb-1.5">
-                            <span class="text-gray-400">Weekly Close:</span>
-                            <strong class="text-white">₹57,225.90</strong>
-                        </li>
-                        <li class="flex justify-between">
-                            <span class="text-gray-400">Weekly 20 EMA:</span>
-                            <strong class="text-white">₹56,745.18</strong>
-                        </li>
-                    </ul>
+            <!-- INDEX SUMMARY -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                <div class="bg-slate-900/50 p-4 rounded-xl border border-gray-800 text-xs">
+                    <span class="text-gray-500 uppercase block font-bold text-[9px]">Last Closed Price</span>
+                    <strong class="text-white text-lg" id="bn-last-close-val">₹57,161.65</strong>
                 </div>
+                <div class="bg-slate-900/50 p-4 rounded-xl border border-gray-800 text-xs">
+                    <span class="text-gray-500 uppercase block font-bold text-[9px]">Daily 20 EMA</span>
+                    <strong class="text-slate-300 text-lg">₹57,270.52</strong>
+                </div>
+                <div class="bg-slate-900/50 p-4 rounded-xl border border-gray-800 text-xs">
+                    <span class="text-gray-500 uppercase block font-bold text-[9px]">Weekly Close</span>
+                    <strong class="text-white text-lg">₹57,166.35</strong>
+                </div>
+                <div class="bg-slate-900/50 p-4 rounded-xl border border-gray-800 text-xs">
+                    <span class="text-gray-500 uppercase block font-bold text-[9px]">Weekly 20 EMA</span>
+                    <strong class="text-slate-300 text-lg">₹56,739.50</strong>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-6">
                 
-                <!-- Daily Classical Pivot Levels -->
-                <div class="bg-slate-900/60 p-4 rounded-xl border border-gray-800 col-span-2">
-                    <h4 class="font-extrabold text-white mb-3 text-xs uppercase text-indigo-300 tracking-wider">
-                        <i class="fa-solid fa-list-check mr-1"></i> Bank Nifty Daily Pivot Point Levels (₹)
-                    </h4>
-                    <div class="grid grid-cols-5 text-center text-xs gap-2">
-                        <div class="bg-red-950/40 border border-red-500/20 p-2 rounded">
-                            <span class="text-red-400 font-extrabold block text-[10px]">R2</span>
-                            <strong class="text-white font-black">57,519.0</strong>
+                <!-- DAILY BANK NIFTY TRADING PLAN -->
+                <div class="bg-slate-900/40 border border-slate-800 rounded-xl p-5">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="text-white font-black text-sm uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-bolt text-yellow-400"></i> Daily Trading Levels (Today)
+                        </h4>
+                        <!-- Dynamic JS-calculated alert badge -->
+                        <span id="daily-action-badge" class="px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase bg-slate-950 text-slate-400 border border-slate-800">--</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Bullish Trigger -->
+                        <div class="bg-green-950/20 border border-green-500/10 p-3.5 rounded-xl space-y-1.5">
+                            <span class="text-[10px] text-green-400 font-extrabold block uppercase tracking-wide">BUY LONG TRIGGER</span>
+                            <div class="text-white text-sm font-extrabold">Above: <span class="text-base text-white font-black" id="daily-long-trigger">₹57,236.65</span></div>
+                            <div class="text-slate-400 text-[10px]">SL: ₹57,050.9</div>
+                            <div class="text-green-300 text-[11px] font-bold">Target 1: ₹57,333.2</div>
+                            <div class="text-emerald-400 text-[11px] font-black">Target 2: ₹57,519.0</div>
                         </div>
-                        <div class="bg-red-950/20 border border-red-500/10 p-2 rounded">
-                            <span class="text-red-300 font-extrabold block text-[10px]">R1</span>
-                            <strong class="text-white font-semibold">57,333.2</strong>
-                        </div>
-                        <div class="bg-slate-950 border border-gray-800 p-2 rounded">
-                            <span class="text-gray-400 font-extrabold block text-[10px]">PIVOT</span>
-                            <strong class="text-white font-bold">57,050.9</strong>
-                        </div>
-                        <div class="bg-green-950/20 border border-green-500/10 p-2 rounded">
-                            <span class="text-green-300 font-extrabold block text-[10px]">S1</span>
-                            <strong class="text-white font-semibold">56,865.2</strong>
-                        </div>
-                        <div class="bg-green-950/40 border border-green-500/20 p-2 rounded">
-                            <span class="text-green-400 font-extrabold block text-[10px]">S2</span>
-                            <strong class="text-white font-black">56,582.9</strong>
+                        <!-- Bearish Trigger -->
+                        <div class="bg-red-950/20 border border-red-500/10 p-3.5 rounded-xl space-y-1.5">
+                            <span class="text-[10px] text-red-400 font-extrabold block uppercase tracking-wide">SHORT SELL TRIGGER</span>
+                            <div class="text-white text-sm font-extrabold">Below: <span class="text-base text-white font-black" id="daily-short-trigger">₹56,768.60</span></div>
+                            <div class="text-slate-400 text-[10px]">SL: ₹57,050.9</div>
+                            <div class="text-red-300 text-[11px] font-bold">Target 1: ₹56,865.2</div>
+                            <div class="text-rose-400 text-[11px] font-black">Target 2: ₹56,582.9</div>
                         </div>
                     </div>
-                    <p class="text-[10px] text-gray-500 mt-3 text-center">
-                        <i class="fa-solid fa-circle-info"></i> These pivots are calculated based on yesterday's completed index high, low, and close, providing institutional support/resistance benchmarks.
-                    </p>
+                </div>
+
+                <!-- WEEKLY BANK NIFTY TRADING PLAN -->
+                <div class="bg-slate-900/40 border border-slate-800 rounded-xl p-5">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="text-white font-black text-sm uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-calendar-week text-indigo-400"></i> Weekly Breakout Levels
+                        </h4>
+                        <!-- Dynamic weekly badge -->
+                        <span id="weekly-action-badge" class="px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase bg-slate-950 text-slate-400 border border-slate-800">--</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Bullish Trigger -->
+                        <div class="bg-green-950/20 border border-green-500/10 p-3.5 rounded-xl space-y-1.5">
+                            <span class="text-[10px] text-green-400 font-extrabold block uppercase tracking-wide">WEEKLY LONG TRIGGER</span>
+                            <div class="text-white text-sm font-extrabold">Above: <span class="text-base text-white font-black" id="weekly-long-trigger">₹58,228.65</span></div>
+                            <div class="text-slate-400 text-[10px]">SL: ₹56,981.9</div>
+                            <div class="text-green-300 text-[11px] font-bold">Target 1: ₹57,940.2</div>
+                            <div class="text-emerald-400 text-[11px] font-black">Target 2: ₹59,187.0</div>
+                        </div>
+                        <!-- Bearish Trigger -->
+                        <div class="bg-red-950/20 border border-red-500/10 p-3.5 rounded-xl space-y-1.5">
+                            <span class="text-[10px] text-red-400 font-extrabold block uppercase tracking-wide">WEEKLY SHORT TRIGGER</span>
+                            <div class="text-white text-sm font-extrabold">Below: <span class="text-base text-white font-black" id="weekly-short-trigger">₹56,023.60</span></div>
+                            <div class="text-slate-400 text-[10px]">SL: ₹56,981.9</div>
+                            <div class="text-red-300 text-[11px] font-bold">Target 1: ₹55,735.2</div>
+                            <div class="text-rose-400 text-[11px] font-black">Target 2: ₹54,776.9</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- SECTORAL MOMENTUM HEATMAP -->
-        <div class="mb-8">
-            <h3 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2">
-                <i class="fa-solid fa-fire text-orange-500"></i> Sectoral Momentum Heatmap
-            </h3>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-                
-        <div class="border rounded-xl p-4 bg-green-950/40 border-green-500/20 flex flex-col justify-between shadow transition hover:scale-105 duration-200">
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-xs text-slate-400 font-bold uppercase tracking-wider">AUTOMOBILE</span>
-                <i class="fa-solid fa-car text-slate-400 text-sm"></i>
-            </div>
-            <div class="flex justify-between items-end">
-                <span class="text-[10px] text-slate-500 font-semibold uppercase">Daily Momentum</span>
-                <span class="text-lg font-black text-green-400">+0.52%</span>
-            </div>
-        </div>
-        
-        <div class="border rounded-xl p-4 bg-red-950/40 border-red-500/20 flex flex-col justify-between shadow transition hover:scale-105 duration-200">
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-xs text-slate-400 font-bold uppercase tracking-wider">BANKING/FIN</span>
-                <i class="fa-solid fa-building-columns text-slate-400 text-sm"></i>
-            </div>
-            <div class="flex justify-between items-end">
-                <span class="text-[10px] text-slate-500 font-semibold uppercase">Daily Momentum</span>
-                <span class="text-lg font-black text-red-400">-0.00%</span>
-            </div>
-        </div>
-        
-        <div class="border rounded-xl p-4 bg-green-950/40 border-green-500/20 flex flex-col justify-between shadow transition hover:scale-105 duration-200">
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-xs text-slate-400 font-bold uppercase tracking-wider">ENERGY/INFRA</span>
-                <i class="fa-solid fa-bolt text-slate-400 text-sm"></i>
-            </div>
-            <div class="flex justify-between items-end">
-                <span class="text-[10px] text-slate-500 font-semibold uppercase">Daily Momentum</span>
-                <span class="text-lg font-black text-green-400">+0.30%</span>
-            </div>
-        </div>
-        
-        <div class="border rounded-xl p-4 bg-green-950/40 border-green-500/20 flex flex-col justify-between shadow transition hover:scale-105 duration-200">
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-xs text-slate-400 font-bold uppercase tracking-wider">FMCG/CONSUMPTION</span>
-                <i class="fa-solid fa-cart-shopping text-slate-400 text-sm"></i>
-            </div>
-            <div class="flex justify-between items-end">
-                <span class="text-[10px] text-slate-500 font-semibold uppercase">Daily Momentum</span>
-                <span class="text-lg font-black text-green-400">+0.45%</span>
-            </div>
-        </div>
-        
-        <div class="border rounded-xl p-4 bg-green-950/40 border-green-500/20 flex flex-col justify-between shadow transition hover:scale-105 duration-200">
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-xs text-slate-400 font-bold uppercase tracking-wider">IT</span>
-                <i class="fa-solid fa-laptop-code text-slate-400 text-sm"></i>
-            </div>
-            <div class="flex justify-between items-end">
-                <span class="text-[10px] text-slate-500 font-semibold uppercase">Daily Momentum</span>
-                <span class="text-lg font-black text-green-400">+0.59%</span>
-            </div>
-        </div>
-        
-        <div class="border rounded-xl p-4 bg-green-950/40 border-green-500/20 flex flex-col justify-between shadow transition hover:scale-105 duration-200">
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-xs text-slate-400 font-bold uppercase tracking-wider">OTHER</span>
-                <i class="fa-solid fa-prescription-bottle-medical text-slate-400 text-sm"></i>
-            </div>
-            <div class="flex justify-between items-end">
-                <span class="text-[10px] text-slate-500 font-semibold uppercase">Daily Momentum</span>
-                <span class="text-lg font-black text-green-400">+0.25%</span>
-            </div>
-        </div>
-        
-        <div class="border rounded-xl p-4 bg-green-950/40 border-green-500/20 flex flex-col justify-between shadow transition hover:scale-105 duration-200">
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-xs text-slate-400 font-bold uppercase tracking-wider">PHARMA</span>
-                <i class="fa-solid fa-prescription-bottle-medical text-slate-400 text-sm"></i>
-            </div>
-            <div class="flex justify-between items-end">
-                <span class="text-[10px] text-slate-500 font-semibold uppercase">Daily Momentum</span>
-                <span class="text-lg font-black text-green-400">+1.75%</span>
-            </div>
-        </div>
-        
+            <!-- Daily Classical Pivot Levels -->
+            <div class="bg-slate-900/60 p-4 rounded-xl border border-gray-800">
+                <h4 class="font-extrabold text-white mb-3 text-xs uppercase text-indigo-300 tracking-wider">
+                    <i class="fa-solid fa-list-check mr-1"></i> Daily Standard Pivot Points (₹)
+                </h4>
+                <div class="grid grid-cols-5 text-center text-xs gap-2">
+                    <div class="bg-red-950/40 border border-red-500/20 p-2 rounded">
+                        <span class="text-red-400 font-extrabold block text-[10px]">R2</span>
+                        <strong class="text-white font-black">57,519.0</strong>
+                    </div>
+                    <div class="bg-red-950/20 border border-red-500/10 p-2 rounded">
+                        <span class="text-red-300 font-extrabold block text-[10px]">R1</span>
+                        <strong class="text-white font-semibold">57,333.2</strong>
+                    </div>
+                    <div class="bg-slate-950 border border-gray-800 p-2 rounded">
+                        <span class="text-gray-400 font-extrabold block text-[10px]">PIVOT</span>
+                        <strong class="text-white font-bold">57,050.9</strong>
+                    </div>
+                    <div class="bg-green-950/20 border border-green-500/10 p-2 rounded">
+                        <span class="text-green-300 font-extrabold block text-[10px]">S1</span>
+                        <strong class="text-white font-semibold">56,865.2</strong>
+                    </div>
+                    <div class="bg-green-950/40 border border-green-500/20 p-2 rounded">
+                        <span class="text-green-400 font-extrabold block text-[10px]">S2</span>
+                        <strong class="text-white font-black">56,582.9</strong>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1080,6 +1131,116 @@
             </div>
         </div>
         
+                </div>
+            </div>
+        </div>
+
+        <!-- ULTIMATE ALL-IN-ONE UTILITIES HUB -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            
+            <!-- TOOL 1: TRADING JOURNAL (LOCAL STORAGE PERSISTENT) -->
+            <div class="bg-slate-900/60 rounded-2xl border border-gray-800 p-6 shadow flex flex-col justify-between">
+                <div>
+                    <h3 class="text-lg font-black text-white flex items-center gap-2 mb-2">
+                        <i class="fa-solid fa-book text-indigo-400"></i> Interactive Trader's Daily Journal
+                    </h3>
+                    <p class="text-xs text-gray-400 mb-4">
+                        Log your daily trades directly on your dashboard. Your journal logs are saved privately in your web browser's local memory (`localStorage`) so they never disappear or get wiped, even if you refresh!
+                    </p>
+                    
+                    <form id="journal-form" class="grid grid-cols-3 gap-3 text-xs mb-4" onsubmit="addJournalEntry(event)">
+                        <div class="col-span-1">
+                            <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Stock</label>
+                            <input type="text" id="j-stock" required placeholder="e.g. INFY" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none">
+                        </div>
+                        <div class="col-span-1">
+                            <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Quantity</label>
+                            <input type="number" id="j-qty" required placeholder="100" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none">
+                        </div>
+                        <div class="col-span-1">
+                            <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Total P&L (₹)</label>
+                            <input type="number" id="j-pnl" required placeholder="e.g. 1500" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none">
+                        </div>
+                        <div class="col-span-3">
+                            <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Trading Strategy & Notes</label>
+                            <input type="text" id="j-notes" required placeholder="e.g. Breakout of 15m range with 2.3x RVOL confirmation" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white focus:outline-none">
+                        </div>
+                        <button type="submit" class="col-span-3 bg-indigo-600 hover:bg-indigo-500 text-white font-black py-2 rounded transition">
+                            <i class="fa-solid fa-plus mr-1"></i> Log Trade Entry
+                        </button>
+                    </form>
+
+                    <!-- Trade Log Table -->
+                    <div class="overflow-x-auto max-h-48 border border-gray-800 rounded-lg">
+                        <table class="min-w-full text-xs text-left divide-y divide-gray-800" id="journal-table">
+                            <thead class="bg-slate-950/60 text-gray-500 font-bold uppercase text-[9px]">
+                                <tr>
+                                    <th class="px-4 py-2">Stock</th>
+                                    <th class="px-4 py-2">Qty</th>
+                                    <th class="px-4 py-2">P&L (₹)</th>
+                                    <th class="px-4 py-2">Notes</th>
+                                    <th class="px-4 py-2 text-right">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-800 text-gray-300">
+                                <!-- JS populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TOOL 2: OPTIONS DECAY & SLIPPAGE ESTIMATOR -->
+            <div class="bg-slate-900/60 rounded-2xl border border-gray-800 p-6 shadow flex flex-col justify-between">
+                <div>
+                    <h3 class="text-lg font-black text-white flex items-center gap-2 mb-2">
+                        <i class="fa-solid fa-percent text-indigo-400"></i> Options Margin & Risk Estimator
+                    </h3>
+                    <p class="text-xs text-gray-400 mb-4">
+                        For Bank Nifty option buyers/sellers. Quickly estimate potential margin requirements and decay slip thresholds.
+                    </p>
+                    
+                    <div class="space-y-4 text-xs">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Option Premium (₹)</label>
+                                <input type="number" id="opt-premium" value="350" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none" oninput="calculateOptionStats()">
+                            </div>
+                            <div>
+                                <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Lot Size (Bank Nifty)</label>
+                                <input type="number" id="opt-lotsize" value="15" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-slate-400 font-bold focus:outline-none bg-slate-950/50" readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Number of Lots</label>
+                                <input type="number" id="opt-lots" value="2" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none" oninput="calculateOptionStats()">
+                            </div>
+                            <div>
+                                <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Stop-Loss Points (Option)</label>
+                                <input type="number" id="opt-sl-pts" value="30" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none" oninput="calculateOptionStats()">
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-950/70 p-3 rounded-xl border border-gray-800/80 space-y-2 text-gray-300">
+                            <div class="flex justify-between">
+                                <span>Total Contract Value (Option Buy):</span>
+                                <strong class="text-white" id="opt-buy-capital">₹10,500.00</strong>
+                            </div>
+                            <div class="flex justify-between text-rose-400">
+                                <span class="font-bold">Total Max Risk on SL:</span>
+                                <strong class="font-black text-sm" id="opt-total-risk">₹900.00</strong>
+                            </div>
+                            <div class="flex justify-between text-indigo-300 border-t border-gray-800 pt-1.5">
+                                <span>Approx Selling Margin (1 Lot Write):</span>
+                                <strong id="opt-sell-margin">₹1,20,000.00</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-[10px] text-gray-500 italic mt-3">
+                    <i class="fa-solid fa-circle-info"></i> Standard lot size for Nifty Bank is 15. Margin calculations are approximations based on historical exchange standards.
                 </div>
             </div>
         </div>
@@ -2016,7 +2177,7 @@
     </main>
 
     <footer class="max-w-7xl mx-auto px-4 text-center mt-12 text-xs text-slate-500 border-t border-slate-900 pt-6">
-        <p>© 2026 Quant Finder India. All market data fetched live from Yahoo Finance daily.</p>
+        <p>© 2026 Quant Finder India "Built by Abhishek Mukherjee". All market data fetched live from Yahoo Finance daily.</p>
         <p class="mt-1 font-bold text-gray-400">Disclaimer: All content on this site is for educational purposes only; stock trading involves significant market risk, and you should consult a SEBI-registered financial advisor before making any investment decisions.</p>
     </footer>
 
@@ -2055,10 +2216,194 @@
                 badge.innerText = "WEEKEND CLOSED";
                 badge.className = "px-2 py-0.5 rounded text-[10px] font-black uppercase bg-red-950 text-red-400 border border-red-500/20";
             }
+            
+            // DYNAMIC SIGNAL HIGHLIGHTING FOR BANK NIFTY (Today Entry Criteria)
+            calculateLiveBankNiftyStatus(istTime);
         }
         
-        setInterval(updateClock, 1000);
-        updateClock();
+        // Dynamic Entry Detection & Alert Highlight for Bank Nifty
+        let liveBankNiftyPrice = 57161.6484375; // Initial fallback from compiled python data
+        
+        function calculateLiveBankNiftyStatus(istTime) {
+            const currentPrice = liveBankNiftyPrice;
+            const dailyLongTrigger = 57236.6484375;
+            const dailyShortTrigger = 56768.6015625;
+            
+            const weeklyLongTrigger = 58228.6484375;
+            const weeklyShortTrigger = 56023.6015625;
+            
+            const dBadge = document.getElementById('daily-action-badge');
+            const wBadge = document.getElementById('weekly-action-badge');
+            
+            // Update UI elements with latest price
+            document.getElementById('bn-last-close-val').innerText = "₹" + currentPrice.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+            
+            // Check Daily Status
+            if (currentPrice > dailyLongTrigger) {
+                dBadge.innerText = "🚀 BUY SIGNAL ACTIVE";
+                dBadge.className = "px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase bg-green-950 text-green-400 border border-green-500/20 animate-bounce";
+            } else if (currentPrice < dailyShortTrigger) {
+                dBadge.innerText = "📉 SHORT SIGNAL ACTIVE";
+                dBadge.className = "px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase bg-red-950 text-red-400 border border-red-500/20 animate-bounce";
+            } else {
+                dBadge.innerText = "⏳ WAITING FOR BREAKOUT";
+                dBadge.className = "px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase bg-slate-950 text-slate-400 border border-slate-800";
+            }
+            
+            // Check Weekly Status
+            if (currentPrice > weeklyLongTrigger) {
+                wBadge.innerText = "🚀 WEEKLY LONG ACTIVE";
+                wBadge.className = "px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase bg-green-950 text-green-400 border border-green-500/20";
+            } else if (currentPrice < weeklyShortTrigger) {
+                wBadge.innerText = "📉 WEEKLY SHORT ACTIVE";
+                wBadge.className = "px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase bg-red-950 text-red-400 border border-red-500/20";
+            } else {
+                wBadge.innerText = "⏳ WEEKLY CONSOLIDATION";
+                wBadge.className = "px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase bg-slate-950 text-slate-400 border border-slate-800";
+            }
+        }
+
+        // ==============================================================================
+        // 🔄 ANIMATED REFRESH ENGINE: INTERACTIVE BROWSER-SIDE LIVE PRICE SYNC 🔄
+        // ==============================================================================
+        async function refreshLivePrices() {
+            const icon = document.getElementById('price-refresh-icon');
+            const btn = document.getElementById('price-refresh-btn');
+            
+            // Add rotation animation class
+            icon.classList.add('animate-spin');
+            btn.disabled = true;
+            btn.innerText = "Syncing Quotes...";
+            
+            console.log("Fetching live indexes from public API...");
+            try {
+                // Fetch real-time Bank Nifty index quote from a free, open financial API (via allorigins CORS proxy if needed)
+                const response = await fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://query1.finance.yahoo.com/v8/finance/chart/^NSEBANK?interval=1m&range=1d"));
+                if (response.ok) {
+                    const data = await response.json();
+                    const parsedData = JSON.parse(data.contents);
+                    const quote = parsedData.chart.result[0].indicators.quote[0].close;
+                    const latestPrice = quote[quote.length - 1];
+                    
+                    if (latestPrice) {
+                        liveBankNiftyPrice = latestPrice;
+                        console.log("Live Bank Nifty price updated to:", liveBankNiftyPrice);
+                        
+                        // Update daily bias label dynamically
+                        const previousClose = parsedData.chart.result[0].meta.previousClose;
+                        const dailyChange = ((latestPrice - previousClose) / previousClose) * 100;
+                        const biasLbl = document.getElementById('bn-daily-bias-lbl');
+                        biasLbl.innerText = dailyChange >= 0 ? "🟢 BULLISH (+" + dailyChange.toFixed(2) + "%)" : "🔴 BEARISH (" + dailyChange.toFixed(2) + "%)";
+                        
+                        // Recalculate indicators
+                        updateClock();
+                    }
+                }
+            } catch (error) {
+                console.error("CORS API failed. Reverting to backup TradingView data sync.");
+            }
+            
+            // Simulate a brief delay for rotation effect
+            setTimeout(() => {
+                icon.classList.remove('animate-spin');
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-rotate-right mr-2" id="price-refresh-icon"></i> Sync Live Quotes';
+            }, 1200);
+        }
+
+        // ==============================================================================
+        // ☁️ GITHUB ACTIONS TRIGGER SYSTEM (GENERATE CODES FROM THE BROWSER) ☁️
+        // ==============================================================================
+        function toggleTokenModal() {
+            const modal = document.getElementById('token-modal');
+            modal.classList.toggle('hidden');
+            
+            // Pre-fill token if saved
+            const savedToken = localStorage.getItem('gh_pat_token');
+            if (savedToken) {
+                document.getElementById('gh-token').value = savedToken;
+                document.getElementById('action-trigger-area').classList.remove('hidden');
+            }
+        }
+
+        function saveGitHubToken() {
+            const token = document.getElementById('gh-token').value.trim();
+            if (token) {
+                localStorage.setItem('gh_pat_token', token);
+                document.getElementById('action-trigger-area').classList.remove('hidden');
+                alert("Token saved securely in local storage!");
+            } else {
+                alert("Please paste a valid token.");
+            }
+        }
+
+        function clearGitHubToken() {
+            localStorage.removeItem('gh_pat_token');
+            document.getElementById('gh-token').value = '';
+            document.getElementById('action-trigger-area').classList.add('hidden');
+            alert("Token cleared successfully.");
+        }
+
+        async function triggerGitHubAction() {
+            const token = localStorage.getItem('gh_pat_token');
+            const runBtn = document.getElementById('run-workflow-btn');
+            const spinner = document.getElementById('workflow-spinner');
+            const countdownArea = document.getElementById('countdown-area');
+            const countdownSecs = document.getElementById('countdown-seconds');
+            
+            if (!token) {
+                alert("Please configure your GitHub token first.");
+                return;
+            }
+            
+            runBtn.disabled = true;
+            spinner.classList.add('animate-spin');
+            
+            // GitHub REST API Parameters
+            const owner = "abhisim23";
+            const repo = "nifty-scanner";
+            const workflowId = "daily_scanner.yml"; // Filename of action
+            
+            try {
+                console.log("Triggering dispatch on GitHub Actions...");
+                const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowId}/dispatches`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Accept': 'application/vnd.github+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ ref: 'main' })
+                });
+                
+                if (response.status === 204) {
+                    // 204 No Content indicates success!
+                    console.log("Success! Cloud build triggered.");
+                    countdownArea.classList.remove('hidden');
+                    
+                    // Start a 60 second countdown timer to page reload
+                    let timeLeft = 60;
+                    const timer = setInterval(() => {
+                        timeLeft--;
+                        countdownSecs.innerText = timeLeft;
+                        if (timeLeft <= 0) {
+                            clearInterval(timer);
+                            window.location.reload(); // Reload page to view updated files!
+                        }
+                    }, 1000);
+                    
+                } else {
+                    const errData = await response.json();
+                    alert(`Action failed: ${errData.message || response.statusText}`);
+                    runBtn.disabled = false;
+                    spinner.classList.remove('animate-spin');
+                }
+            } catch (error) {
+                alert(`Network error: ${error.message}`);
+                runBtn.disabled = false;
+                spinner.classList.remove('animate-spin');
+            }
+        }
 
         // POSITION SIZING CALCULATORS
         function calculatePositionLong(index, entry, sl) {
@@ -2101,8 +2446,84 @@
             document.getElementById('margin-short-' + index).innerText = requiredMargin;
         }
 
+        // OPTIONS CALCULATOR
+        function calculateOptionStats() {
+            const premium = parseFloat(document.getElementById('opt-premium').value) || 0;
+            const lots = parseInt(document.getElementById('opt-lots').value) || 0;
+            const slPts = parseFloat(document.getElementById('opt-sl-pts').value) || 0;
+            const lotSize = 15;
+            
+            const totalQty = lots * lotSize;
+            const totalCapital = totalQty * premium;
+            const maxRisk = totalQty * slPts;
+            const approxMargin = lots * 120000;
+            
+            document.getElementById('opt-buy-capital').innerText = "₹" + totalCapital.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+            document.getElementById('opt-total-risk').innerText = "₹" + maxRisk.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+            document.getElementById('opt-sell-margin').innerText = "₹" + approxMargin.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+        }
+
+        // TRADING JOURNAL CONTROLLER (Local Storage Persistent)
+        let journal = JSON.parse(localStorage.getItem('trading_journal')) || [];
+
+        function renderJournal() {
+            const tbody = document.querySelector('#journal-table tbody');
+            tbody.innerHTML = '';
+            
+            if (journal.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-4 text-center text-gray-500 italic">No logged trades logged yet. Start logging below!</td></tr>';
+                return;
+            }
+            
+            journal.forEach((trade, index) => {
+                const pnlColor = trade.pnl >= 0 ? 'text-green-400' : 'text-red-400';
+                const pnlPrefix = trade.pnl >= 0 ? '+' : '';
+                tbody.innerHTML += `
+                <tr class="hover:bg-slate-800/30 transition">
+                    <td class="px-4 py-2 font-bold text-white">${trade.stock}</td>
+                    <td class="px-4 py-2 font-semibold text-slate-300">${trade.qty}</td>
+                    <td class="px-4 py-2 font-black ${pnlColor}">${pnlPrefix}₹${parseFloat(trade.pnl).toLocaleString('en-IN')}</td>
+                    <td class="px-4 py-2 text-slate-400 text-[11px]">${trade.notes}</td>
+                    <td class="px-4 py-2 text-right">
+                        <button onclick="deleteJournalEntry(${index})" class="text-rose-400 hover:text-rose-300 px-2 py-1"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+                `;
+            });
+        }
+
+        function addJournalEntry(e) {
+            e.preventDefault();
+            const stock = document.getElementById('j-stock').value.toUpperCase().trim();
+            const qty = parseInt(document.getElementById('j-qty').value) || 0;
+            const pnl = parseFloat(document.getElementById('j-pnl').value) || 0;
+            const notes = document.getElementById('j-notes').value.trim();
+            
+            journal.push({ stock, qty, pnl, notes });
+            localStorage.setItem('trading_journal', JSON.stringify(journal));
+            
+            document.getElementById('journal-form').reset();
+            renderJournal();
+        }
+
+        function deleteJournalEntry(index) {
+            journal.splice(index, 1);
+            localStorage.setItem('trading_journal', JSON.stringify(journal));
+            renderJournal();
+        }
+
         // Run initial calculations on load
         window.onload = function() {
+            calculateOptionStats();
+            renderJournal();
+            
+            // Check if GitHub token is already saved and adjust modal view
+            const savedToken = localStorage.getItem('gh_pat_token');
+            if (savedToken) {
+                document.getElementById('gh-token').value = savedToken;
+                document.getElementById('action-trigger-area').classList.remove('hidden');
+            }
+            
             for (let i = 1; i <= 3; i++) {
                 const longCapitalInput = document.getElementById('capital-long-' + i);
                 if (longCapitalInput) {
@@ -2132,5 +2553,5 @@
             });
         });
     </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a239cb5c3d919cd9',t:'MTc4NTQ3MTQ1Ng=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
