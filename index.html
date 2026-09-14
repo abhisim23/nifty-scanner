@@ -36,7 +36,7 @@
                     <span id="market-state" class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-red-950 text-red-400 border border-red-500/20">CLOSED</span>
                 </div>
                 <div class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-xs">
-                    <span class="text-gray-400">Session:</span> <strong class="text-white">2026-09-11</strong>
+                    <span class="text-gray-400">Session:</span> <strong class="text-white">2026-09-14</strong>
                 </div>
             </div>
         </div>
@@ -163,85 +163,13 @@
                         This panel monitors live 15-minute price bars. The moment any Nifty 50 stock breaks above or below its first 15-minute candle range (09:15 - 09:30 AM), it is tracked here as an active momentum trade.
                     </p>
                     <div class="grid grid-cols-1 gap-4" id="orb-live-container">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 col-span-full">
-        <div class="bg-slate-900/60 border border-green-500/20 rounded-2xl p-5 shadow">
-            <h4 class="text-green-400 font-bold text-sm mb-4 flex items-center gap-2 uppercase tracking-wider">
-                <i class="fa-solid fa-circle-arrow-up text-lg"></i> Live Bullish ORB Breakouts (Above 15m High)
-            </h4>
-            <div class="space-y-3">
+                        
+        <div class="col-span-full bg-slate-900/40 rounded-xl p-6 border border-slate-800 text-center text-xs text-gray-400">
+            <i class="fa-solid fa-hourglass-start text-yellow-500 text-lg mb-2"></i><br>
+            <strong>Waiting for regular market hours...</strong><br>
+            During trading sessions (09:15 AM - 03:30 PM IST), this panel scans active 15-minute bars and lists Nifty 50 stocks breaking their Opening Range in real-time!
+        </div>
         
-                <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
-                    <div>
-                        <strong class="text-white text-sm block">HDFCBANK</strong>
-                        <span class="text-gray-400">Range: ₹682.1 - ₹686.8</span>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-green-400 font-black block text-sm">₹708.25</span>
-                        <span class="text-green-500 font-bold bg-green-950 px-2 py-0.5 rounded text-[10px] uppercase">+3.12% Breakout</span>
-                    </div>
-                </div>
-                
-                <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
-                    <div>
-                        <strong class="text-white text-sm block">DRREDDY</strong>
-                        <span class="text-gray-400">Range: ₹1132.0 - ₹1141.0</span>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-green-400 font-black block text-sm">₹1165.50</span>
-                        <span class="text-green-500 font-bold bg-green-950 px-2 py-0.5 rounded text-[10px] uppercase">+2.15% Breakout</span>
-                    </div>
-                </div>
-                
-                <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
-                    <div>
-                        <strong class="text-white text-sm block">BPCL</strong>
-                        <span class="text-gray-400">Range: ₹296.5 - ₹299.3</span>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-green-400 font-black block text-sm">₹304.50</span>
-                        <span class="text-green-500 font-bold bg-green-950 px-2 py-0.5 rounded text-[10px] uppercase">+1.74% Breakout</span>
-                    </div>
-                </div>
-                </div></div>
-        <div class="bg-slate-900/60 border border-red-500/20 rounded-2xl p-5 shadow">
-            <h4 class="text-red-400 font-bold text-sm mb-4 flex items-center gap-2 uppercase tracking-wider">
-                <i class="fa-solid fa-circle-arrow-down text-lg"></i> Live Bearish ORB Breakdown (Below 15m Low)
-            </h4>
-            <div class="space-y-3">
-        
-                <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
-                    <div>
-                        <strong class="text-white text-sm block">ONGC</strong>
-                        <span class="text-gray-400">Range: ₹237.7 - ₹243.1</span>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-red-400 font-black block text-sm">₹232.50</span>
-                        <span class="text-red-500 font-bold bg-red-950 px-2 py-0.5 rounded text-[10px] uppercase">+2.20% Breakdown</span>
-                    </div>
-                </div>
-                
-                <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
-                    <div>
-                        <strong class="text-white text-sm block">COALINDIA</strong>
-                        <span class="text-gray-400">Range: ₹431.0 - ₹434.0</span>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-red-400 font-black block text-sm">₹426.40</span>
-                        <span class="text-red-500 font-bold bg-red-950 px-2 py-0.5 rounded text-[10px] uppercase">+1.08% Breakdown</span>
-                    </div>
-                </div>
-                
-                <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
-                    <div>
-                        <strong class="text-white text-sm block">JSWSTEEL</strong>
-                        <span class="text-gray-400">Range: ₹1269.7 - ₹1284.4</span>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-red-400 font-black block text-sm">₹1265.00</span>
-                        <span class="text-red-500 font-bold bg-red-950 px-2 py-0.5 rounded text-[10px] uppercase">+0.37% Breakdown</span>
-                    </div>
-                </div>
-                </div></div></div>
                     </div>
                 </div>
                 <div class="mt-4 text-[10px] text-gray-500 italic flex items-center gap-1.5 border-t border-gray-800/60 pt-3">
@@ -308,7 +236,7 @@
                 </div>
                 <div class="bg-slate-900/50 p-4 rounded-xl border border-gray-800 text-xs">
                     <span class="text-gray-500 uppercase block font-bold text-[9px]">Daily 20 EMA</span>
-                    <strong class="text-slate-300 text-lg">₹57,159.28</strong>
+                    <strong class="text-slate-300 text-lg">₹57,162.36</strong>
                 </div>
                 <div class="bg-slate-900/50 p-4 rounded-xl border border-gray-800 text-xs">
                     <span class="text-gray-500 uppercase block font-bold text-[9px]">Weekly Close</span>
@@ -316,7 +244,7 @@
                 </div>
                 <div class="bg-slate-900/50 p-4 rounded-xl border border-gray-800 text-xs">
                     <span class="text-gray-500 uppercase block font-bold text-[9px]">Weekly 20 EMA</span>
-                    <strong class="text-slate-300 text-lg">₹57,021.52</strong>
+                    <strong class="text-slate-300 text-lg">₹57,025.09</strong>
                 </div>
             </div>
 
@@ -336,18 +264,18 @@
                         <!-- Bullish Trigger -->
                         <div class="bg-green-950/20 border border-green-500/10 p-3.5 rounded-xl space-y-1.5">
                             <span class="text-[10px] text-green-400 font-extrabold block uppercase tracking-wide">BUY LONG TRIGGER</span>
-                            <div class="text-white text-sm font-extrabold">Above: <span class="text-base text-white font-black" id="daily-long-trigger">₹56,575.15</span></div>
-                            <div class="text-slate-400 text-[10px]">SL: ₹56,426.3</div>
-                            <div class="text-green-300 text-[11px] font-bold">Target 1: ₹56,620.8</div>
-                            <div class="text-emerald-400 text-[11px] font-black">Target 2: ₹56,769.6</div>
+                            <div class="text-white text-sm font-extrabold">Above: <span class="text-base text-white font-black" id="daily-long-trigger">₹56,645.85</span></div>
+                            <div class="text-slate-400 text-[10px]">SL: ₹56,317.3</div>
+                            <div class="text-green-300 text-[11px] font-bold">Target 1: ₹56,935.1</div>
+                            <div class="text-emerald-400 text-[11px] font-black">Target 2: ₹57,263.7</div>
                         </div>
                         <!-- Bearish Trigger -->
                         <div class="bg-red-950/20 border border-red-500/10 p-3.5 rounded-xl space-y-1.5">
                             <span class="text-[10px] text-red-400 font-extrabold block uppercase tracking-wide">SHORT SELL TRIGGER</span>
-                            <div class="text-white text-sm font-extrabold">Below: <span class="text-base text-white font-black" id="daily-short-trigger">₹56,231.85</span></div>
-                            <div class="text-slate-400 text-[10px]">SL: ₹56,426.3</div>
-                            <div class="text-red-300 text-[11px] font-bold">Target 1: ₹56,277.5</div>
-                            <div class="text-rose-400 text-[11px] font-black">Target 2: ₹56,083.0</div>
+                            <div class="text-white text-sm font-extrabold">Below: <span class="text-base text-white font-black" id="daily-short-trigger">₹55,699.45</span></div>
+                            <div class="text-slate-400 text-[10px]">SL: ₹56,317.3</div>
+                            <div class="text-red-300 text-[11px] font-bold">Target 1: ₹55,988.7</div>
+                            <div class="text-rose-400 text-[11px] font-black">Target 2: ₹55,370.9</div>
                         </div>
                     </div>
                 </div>
@@ -366,18 +294,18 @@
                         <!-- Bullish Trigger -->
                         <div class="bg-green-950/20 border border-green-500/10 p-3.5 rounded-xl space-y-1.5">
                             <span class="text-[10px] text-green-400 font-extrabold block uppercase tracking-wide">WEEKLY LONG TRIGGER</span>
-                            <div class="text-white text-sm font-extrabold">Above: <span class="text-base text-white font-black" id="weekly-long-trigger">₹58,024.95</span></div>
-                            <div class="text-slate-400 text-[10px]">SL: ₹57,405.9</div>
-                            <div class="text-green-300 text-[11px] font-bold">Target 1: ₹57,988.7</div>
-                            <div class="text-emerald-400 text-[11px] font-black">Target 2: ₹58,607.7</div>
+                            <div class="text-white text-sm font-extrabold">Above: <span class="text-base text-white font-black" id="weekly-long-trigger">₹57,426.85</span></div>
+                            <div class="text-slate-400 text-[10px]">SL: ₹56,577.6</div>
+                            <div class="text-green-300 text-[11px] font-bold">Target 1: ₹57,455.8</div>
+                            <div class="text-emerald-400 text-[11px] font-black">Target 2: ₹58,305.0</div>
                         </div>
                         <!-- Bearish Trigger -->
                         <div class="bg-red-950/20 border border-red-500/10 p-3.5 rounded-xl space-y-1.5">
                             <span class="text-[10px] text-red-400 font-extrabold block uppercase tracking-wide">WEEKLY SHORT TRIGGER</span>
-                            <div class="text-white text-sm font-extrabold">Below: <span class="text-base text-white font-black" id="weekly-short-trigger">₹56,823.20</span></div>
-                            <div class="text-slate-400 text-[10px]">SL: ₹57,405.9</div>
-                            <div class="text-red-300 text-[11px] font-bold">Target 1: ₹56,786.9</div>
-                            <div class="text-rose-400 text-[11px] font-black">Target 2: ₹56,204.2</div>
+                            <div class="text-white text-sm font-extrabold">Below: <span class="text-base text-white font-black" id="weekly-short-trigger">₹55,699.45</span></div>
+                            <div class="text-slate-400 text-[10px]">SL: ₹56,577.6</div>
+                            <div class="text-red-300 text-[11px] font-bold">Target 1: ₹55,728.4</div>
+                            <div class="text-rose-400 text-[11px] font-black">Target 2: ₹54,850.2</div>
                         </div>
                     </div>
                 </div>
@@ -391,23 +319,23 @@
                 <div class="grid grid-cols-5 text-center text-xs gap-2">
                     <div class="bg-red-950/40 border border-red-500/20 p-2 rounded">
                         <span class="text-red-400 font-extrabold block text-[10px]">R2</span>
-                        <strong class="text-white font-black">56,769.6</strong>
+                        <strong class="text-white font-black">57,263.7</strong>
                     </div>
                     <div class="bg-red-950/20 border border-red-500/10 p-2 rounded">
                         <span class="text-red-300 font-extrabold block text-[10px]">R1</span>
-                        <strong class="text-white font-semibold">56,620.8</strong>
+                        <strong class="text-white font-semibold">56,935.1</strong>
                     </div>
                     <div class="bg-slate-950 border border-gray-800 p-2 rounded">
                         <span class="text-gray-400 font-extrabold block text-[10px]">PIVOT</span>
-                        <strong class="text-white font-bold">56,426.3</strong>
+                        <strong class="text-white font-bold">56,317.3</strong>
                     </div>
                     <div class="bg-green-950/20 border border-green-500/10 p-2 rounded">
                         <span class="text-green-300 font-extrabold block text-[10px]">S1</span>
-                        <strong class="text-white font-semibold">56,277.5</strong>
+                        <strong class="text-white font-semibold">55,988.7</strong>
                     </div>
                     <div class="bg-green-950/40 border border-green-500/20 p-2 rounded">
                         <span class="text-green-400 font-extrabold block text-[10px]">S2</span>
-                        <strong class="text-white font-black">56,083.0</strong>
+                        <strong class="text-white font-black">55,370.9</strong>
                     </div>
                 </div>
             </div>
@@ -434,23 +362,23 @@
             <div class="bg-slate-900/60 border border-indigo-500/20 rounded-xl p-4 flex flex-col justify-between hover:border-indigo-500/50 hover:bg-slate-900/90 transition duration-300">
                 <div class="flex justify-between items-start mb-2">
                     <div>
-                        <h4 class="text-lg font-black text-white">IDEA</h4>
-                        <span class="text-[9px] font-bold text-indigo-300 uppercase tracking-widest bg-indigo-950/60 border border-indigo-500/10 px-2 py-0.5 rounded-full">📈 Steady Accumulation</span>
+                        <h4 class="text-lg font-black text-white">YESBANK</h4>
+                        <span class="text-[9px] font-bold text-indigo-300 uppercase tracking-widest bg-indigo-950/60 border border-indigo-500/10 px-2 py-0.5 rounded-full">🔥 Volume Spike</span>
                     </div>
                     <div class="text-right">
                         <span class="text-[9px] text-gray-500 font-bold uppercase block">Price</span>
-                        <span class="font-extrabold text-white text-base">₹14.90</span>
+                        <span class="font-extrabold text-white text-base">₹23.48</span>
                     </div>
                 </div>
                 
                 <div class="grid grid-cols-2 gap-2 border-t border-gray-800 pt-3 mt-3 text-xs">
                     <div>
                         <span class="text-gray-500 text-[9px] block uppercase">Rel Volume (RVOL)</span>
-                        <span class="font-extrabold text-white">1.99x</span>
+                        <span class="font-extrabold text-white">3.68x</span>
                     </div>
                     <div>
                         <span class="text-gray-500 text-[9px] block uppercase">Day Change</span>
-                        <span class="font-extrabold text-red-400">-3.99%</span>
+                        <span class="font-extrabold text-green-400">+5.29%</span>
                     </div>
                 </div>
             </div>
@@ -458,23 +386,23 @@
             <div class="bg-slate-900/60 border border-indigo-500/20 rounded-xl p-4 flex flex-col justify-between hover:border-indigo-500/50 hover:bg-slate-900/90 transition duration-300">
                 <div class="flex justify-between items-start mb-2">
                     <div>
-                        <h4 class="text-lg font-black text-white">SJVN</h4>
+                        <h4 class="text-lg font-black text-white">SUZLON</h4>
                         <span class="text-[9px] font-bold text-indigo-300 uppercase tracking-widest bg-indigo-950/60 border border-indigo-500/10 px-2 py-0.5 rounded-full">📈 Steady Accumulation</span>
                     </div>
                     <div class="text-right">
                         <span class="text-[9px] text-gray-500 font-bold uppercase block">Price</span>
-                        <span class="font-extrabold text-white text-base">₹67.20</span>
+                        <span class="font-extrabold text-white text-base">₹44.12</span>
                     </div>
                 </div>
                 
                 <div class="grid grid-cols-2 gap-2 border-t border-gray-800 pt-3 mt-3 text-xs">
                     <div>
                         <span class="text-gray-500 text-[9px] block uppercase">Rel Volume (RVOL)</span>
-                        <span class="font-extrabold text-white">1.89x</span>
+                        <span class="font-extrabold text-white">1.33x</span>
                     </div>
                     <div>
                         <span class="text-gray-500 text-[9px] block uppercase">Day Change</span>
-                        <span class="font-extrabold text-green-400">+0.48%</span>
+                        <span class="font-extrabold text-red-400">-0.23%</span>
                     </div>
                 </div>
             </div>
@@ -521,38 +449,38 @@
                 <div class="grid grid-cols-2 gap-4 border-t border-b border-gray-700 py-3 my-4 text-sm text-gray-300">
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">Close Price</span>
-                        <span class="font-bold text-lg text-white">₹1,768.00</span>
+                        <span class="font-bold text-lg text-white">₹1,764.60</span>
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">Avg Range (ATR%)</span>
-                        <span class="font-bold text-lg text-white">2.36%</span>
+                        <span class="font-bold text-lg text-white">2.38%</span>
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">Rel Volume (RVOL)</span>
-                        <span class="font-bold text-lg text-white">1.10x</span>
+                        <span class="font-bold text-lg text-white">0.67x</span>
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">RSI (14)</span>
-                        <span class="font-bold text-lg text-white">59.4</span>
+                        <span class="font-bold text-lg text-white">58.7</span>
                     </div>
                 </div>
                 
                 <div class="space-y-2 mb-4">
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-green-400 font-bold uppercase">Trigger Entry (Above)</span>
-                        <span class="font-black text-white">₹1,780.00</span>
+                        <span class="font-black text-white">₹1,771.90</span>
                     </div>
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-red-400 font-bold uppercase">Stop-Loss (SL)</span>
-                        <span class="font-black text-white" id="sl-long-1">₹1,759.15</span>
+                        <span class="font-black text-white" id="sl-long-1">₹1,750.91</span>
                     </div>
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-yellow-400 font-bold uppercase">Target 1 (1:1 R:R)</span>
-                        <span class="font-black text-white">₹1,811.28</span>
+                        <span class="font-black text-white">₹1,803.39</span>
                     </div>
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-emerald-400 font-bold uppercase">Target 2 (2:1 R:R)</span>
-                        <span class="font-black text-white">₹1,842.55</span>
+                        <span class="font-black text-white">₹1,834.88</span>
                     </div>
                 </div>
             </div>
@@ -565,11 +493,11 @@
                 <div class="grid grid-cols-2 gap-3 mb-3">
                     <div>
                         <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Trading Capital</label>
-                        <input type="number" id="capital-long-1" value="50000" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionLong(1, 1780.0, 1759.1499938964844)">
+                        <input type="number" id="capital-long-1" value="50000" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionLong(1, 1771.9000244140625, 1750.9071611676898)">
                     </div>
                     <div>
                         <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Risk per Trade (%)</label>
-                        <input type="number" id="risk-long-1" value="1" step="0.5" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionLong(1, 1780.0, 1759.1499938964844)">
+                        <input type="number" id="risk-long-1" value="1" step="0.5" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionLong(1, 1771.9000244140625, 1750.9071611676898)">
                     </div>
                 </div>
                 <div class="bg-gray-950 p-2.5 rounded border border-gray-800 space-y-1 text-[11px] text-gray-300">
@@ -592,15 +520,15 @@
                 <div class="grid grid-cols-3 text-center gap-1">
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Resistance 2</span>
-                        <span class="text-white font-medium">₹1,795.73</span>
+                        <span class="text-white font-medium">₹1,783.53</span>
                     </div>
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Resistance 1</span>
-                        <span class="text-white font-medium">₹1,781.87</span>
+                        <span class="text-white font-medium">₹1,774.07</span>
                     </div>
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Pivot (P)</span>
-                        <span class="text-white font-medium">₹1,766.13</span>
+                        <span class="text-white font-medium">₹1,762.43</span>
                     </div>
                 </div>
             </div>
@@ -611,8 +539,8 @@
                 <div class="flex justify-between items-start mb-4">
                     <div>
                         <span class="bg-green-900 text-green-300 text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">BUY LONG</span>
-                        <h3 class="text-2xl font-black text-white mt-2">KOTAKBANK</h3>
-                        <p class="text-xs text-gray-400 font-medium">KOTAKBANK.NS • Sector: <span class="text-indigo-300 font-bold">BANKING/FIN</span></p>
+                        <h3 class="text-2xl font-black text-white mt-2">DIVISLAB</h3>
+                        <p class="text-xs text-gray-400 font-medium">DIVISLAB.NS • Sector: <span class="text-indigo-300 font-bold">PHARMA</span></p>
                     </div>
                     <div class="text-right">
                         <span class="text-xs text-gray-400 font-semibold block uppercase">Quant Score</span>
@@ -623,38 +551,38 @@
                 <div class="grid grid-cols-2 gap-4 border-t border-b border-gray-700 py-3 my-4 text-sm text-gray-300">
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">Close Price</span>
-                        <span class="font-bold text-lg text-white">₹416.55</span>
+                        <span class="font-bold text-lg text-white">₹9,322.00</span>
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">Avg Range (ATR%)</span>
-                        <span class="font-bold text-lg text-white">1.69%</span>
+                        <span class="font-bold text-lg text-white">2.45%</span>
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">Rel Volume (RVOL)</span>
-                        <span class="font-bold text-lg text-white">0.65x</span>
+                        <span class="font-bold text-lg text-white">1.16x</span>
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">RSI (14)</span>
-                        <span class="font-bold text-lg text-white">57.8</span>
+                        <span class="font-bold text-lg text-white">63.8</span>
                     </div>
                 </div>
                 
                 <div class="space-y-2 mb-4">
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-green-400 font-bold uppercase">Trigger Entry (Above)</span>
-                        <span class="font-black text-white">₹417.38</span>
+                        <span class="font-black text-white">₹9,415.00</span>
                     </div>
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-red-400 font-bold uppercase">Stop-Loss (SL)</span>
-                        <span class="font-black text-white" id="sl-long-2">₹413.87</span>
+                        <span class="font-black text-white" id="sl-long-2">₹9,300.91</span>
                     </div>
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-yellow-400 font-bold uppercase">Target 1 (1:1 R:R)</span>
-                        <span class="font-black text-white">₹422.65</span>
+                        <span class="font-black text-white">₹9,586.13</span>
                     </div>
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-emerald-400 font-bold uppercase">Target 2 (2:1 R:R)</span>
-                        <span class="font-black text-white">₹427.92</span>
+                        <span class="font-black text-white">₹9,757.27</span>
                     </div>
                 </div>
             </div>
@@ -667,11 +595,11 @@
                 <div class="grid grid-cols-2 gap-3 mb-3">
                     <div>
                         <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Trading Capital</label>
-                        <input type="number" id="capital-long-2" value="50000" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionLong(2, 417.3830877685547, 413.87058646065844)">
+                        <input type="number" id="capital-long-2" value="50000" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionLong(2, 9415.0, 9300.910714285714)">
                     </div>
                     <div>
                         <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Risk per Trade (%)</label>
-                        <input type="number" id="risk-long-2" value="1" step="0.5" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionLong(2, 417.3830877685547, 413.87058646065844)">
+                        <input type="number" id="risk-long-2" value="1" step="0.5" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionLong(2, 9415.0, 9300.910714285714)">
                     </div>
                 </div>
                 <div class="bg-gray-950 p-2.5 rounded border border-gray-800 space-y-1 text-[11px] text-gray-300">
@@ -694,15 +622,15 @@
                 <div class="grid grid-cols-3 text-center gap-1">
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Resistance 2</span>
-                        <span class="text-white font-medium">₹419.05</span>
+                        <span class="text-white font-medium">₹9,453.67</span>
                     </div>
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Resistance 1</span>
-                        <span class="text-white font-medium">₹417.80</span>
+                        <span class="text-white font-medium">₹9,387.83</span>
                     </div>
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Pivot (P)</span>
-                        <span class="text-white font-medium">₹415.30</span>
+                        <span class="text-white font-medium">₹9,349.17</span>
                     </div>
                 </div>
             </div>
@@ -713,8 +641,8 @@
                 <div class="flex justify-between items-start mb-4">
                     <div>
                         <span class="bg-green-900 text-green-300 text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">BUY LONG</span>
-                        <h3 class="text-2xl font-black text-white mt-2">GRASIM</h3>
-                        <p class="text-xs text-gray-400 font-medium">GRASIM.NS • Sector: <span class="text-indigo-300 font-bold">ENERGY/INFRA</span></p>
+                        <h3 class="text-2xl font-black text-white mt-2">KOTAKBANK</h3>
+                        <p class="text-xs text-gray-400 font-medium">KOTAKBANK.NS • Sector: <span class="text-indigo-300 font-bold">BANKING/FIN</span></p>
                     </div>
                     <div class="text-right">
                         <span class="text-xs text-gray-400 font-semibold block uppercase">Quant Score</span>
@@ -725,38 +653,38 @@
                 <div class="grid grid-cols-2 gap-4 border-t border-b border-gray-700 py-3 my-4 text-sm text-gray-300">
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">Close Price</span>
-                        <span class="font-bold text-lg text-white">₹3,319.00</span>
+                        <span class="font-bold text-lg text-white">₹419.00</span>
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">Avg Range (ATR%)</span>
-                        <span class="font-bold text-lg text-white">1.91%</span>
+                        <span class="font-bold text-lg text-white">1.73%</span>
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">Rel Volume (RVOL)</span>
-                        <span class="font-bold text-lg text-white">0.93x</span>
+                        <span class="font-bold text-lg text-white">1.24x</span>
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">RSI (14)</span>
-                        <span class="font-bold text-lg text-white">56.1</span>
+                        <span class="font-bold text-lg text-white">59.8</span>
                     </div>
                 </div>
                 
                 <div class="space-y-2 mb-4">
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-green-400 font-bold uppercase">Trigger Entry (Above)</span>
-                        <span class="font-black text-white">₹3,325.64</span>
+                        <span class="font-black text-white">₹420.00</span>
                     </div>
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-red-400 font-bold uppercase">Stop-Loss (SL)</span>
-                        <span class="font-black text-white" id="sl-long-3">₹3,293.90</span>
+                        <span class="font-black text-white" id="sl-long-3">₹416.37</span>
                     </div>
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-yellow-400 font-bold uppercase">Target 1 (1:1 R:R)</span>
-                        <span class="font-black text-white">₹3,373.25</span>
+                        <span class="font-black text-white">₹425.45</span>
                     </div>
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-emerald-400 font-bold uppercase">Target 2 (2:1 R:R)</span>
-                        <span class="font-black text-white">₹3,420.86</span>
+                        <span class="font-black text-white">₹430.90</span>
                     </div>
                 </div>
             </div>
@@ -769,11 +697,11 @@
                 <div class="grid grid-cols-2 gap-3 mb-3">
                     <div>
                         <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Trading Capital</label>
-                        <input type="number" id="capital-long-3" value="50000" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionLong(3, 3325.638, 3293.898724748884)">
+                        <input type="number" id="capital-long-3" value="50000" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionLong(3, 420.0, 416.36785561697826)">
                     </div>
                     <div>
                         <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Risk per Trade (%)</label>
-                        <input type="number" id="risk-long-3" value="1" step="0.5" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionLong(3, 3325.638, 3293.898724748884)">
+                        <input type="number" id="risk-long-3" value="1" step="0.5" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionLong(3, 420.0, 416.36785561697826)">
                     </div>
                 </div>
                 <div class="bg-gray-950 p-2.5 rounded border border-gray-800 space-y-1 text-[11px] text-gray-300">
@@ -796,15 +724,15 @@
                 <div class="grid grid-cols-3 text-center gap-1">
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Resistance 2</span>
-                        <span class="text-white font-medium">₹3,352.27</span>
+                        <span class="text-white font-medium">₹426.83</span>
                     </div>
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Resistance 1</span>
-                        <span class="text-white font-medium">₹3,335.63</span>
+                        <span class="text-white font-medium">₹422.92</span>
                     </div>
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Pivot (P)</span>
-                        <span class="text-white font-medium">₹3,307.77</span>
+                        <span class="text-white font-medium">₹416.08</span>
                     </div>
                 </div>
             </div>
@@ -830,50 +758,50 @@
                 <div class="flex justify-between items-start mb-4">
                     <div>
                         <span class="bg-red-900 text-red-300 text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">SHORT SELL</span>
-                        <h3 class="text-2xl font-black text-white mt-2">HCLTECH</h3>
-                        <p class="text-xs text-gray-400 font-medium">HCLTECH.NS • Sector: <span class="text-indigo-300 font-bold">IT</span></p>
+                        <h3 class="text-2xl font-black text-white mt-2">HINDALCO</h3>
+                        <p class="text-xs text-gray-400 font-medium">HINDALCO.NS • Sector: <span class="text-indigo-300 font-bold">ENERGY/INFRA</span></p>
                     </div>
                     <div class="text-right">
                         <span class="text-xs text-gray-400 font-semibold block uppercase">Quant Score</span>
-                        <span class="text-3xl font-black text-red-400">85<span class="text-xs text-gray-500">/100</span></span>
+                        <span class="text-3xl font-black text-red-400">95<span class="text-xs text-gray-500">/100</span></span>
                     </div>
                 </div>
                 
                 <div class="grid grid-cols-2 gap-4 border-t border-b border-gray-700 py-3 my-4 text-sm text-gray-300">
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">Close Price</span>
-                        <span class="font-bold text-lg text-white">₹1,207.00</span>
+                        <span class="font-bold text-lg text-white">₹981.50</span>
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">Avg Range (ATR%)</span>
-                        <span class="font-bold text-lg text-white">2.93%</span>
+                        <span class="font-bold text-lg text-white">2.40%</span>
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">Rel Volume (RVOL)</span>
-                        <span class="font-bold text-lg text-white">1.08x</span>
+                        <span class="font-bold text-lg text-white">1.53x</span>
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">RSI (14)</span>
-                        <span class="font-bold text-lg text-white">33.1</span>
+                        <span class="font-bold text-lg text-white">39.2</span>
                     </div>
                 </div>
                 
                 <div class="space-y-2 mb-4">
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-red-400 font-bold uppercase">Trigger Entry (Below)</span>
-                        <span class="font-black text-white">₹1,196.90</span>
+                        <span class="font-black text-white">₹973.10</span>
                     </div>
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-green-400 font-bold uppercase">Stop-Loss (SL)</span>
-                        <span class="font-black text-white" id="sl-short-4">₹1,214.58</span>
+                        <span class="font-black text-white" id="sl-short-4">₹984.87</span>
                     </div>
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-yellow-400 font-bold uppercase">Target 1 (1:1 R:R)</span>
-                        <span class="font-black text-white">₹1,170.38</span>
+                        <span class="font-black text-white">₹955.45</span>
                     </div>
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-emerald-400 font-bold uppercase">Target 2 (2:1 R:R)</span>
-                        <span class="font-black text-white">₹1,143.85</span>
+                        <span class="font-black text-white">₹937.79</span>
                     </div>
                 </div>
             </div>
@@ -886,11 +814,11 @@
                 <div class="grid grid-cols-2 gap-3 mb-3">
                     <div>
                         <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Trading Capital</label>
-                        <input type="number" id="capital-short-4" value="50000" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionShort(4, 1196.9000244140625, 1214.5821751185827)">
+                        <input type="number" id="capital-short-4" value="50000" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionShort(4, 973.0999755859375, 984.869624546596)">
                     </div>
                     <div>
                         <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Risk per Trade (%)</label>
-                        <input type="number" id="risk-short-4" value="1" step="0.5" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionShort(4, 1196.9000244140625, 1214.5821751185827)">
+                        <input type="number" id="risk-short-4" value="1" step="0.5" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionShort(4, 973.0999755859375, 984.869624546596)">
                     </div>
                 </div>
                 <div class="bg-gray-950 p-2.5 rounded border border-gray-800 space-y-1 text-[11px] text-gray-300">
@@ -913,15 +841,15 @@
                 <div class="grid grid-cols-3 text-center gap-1">
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Pivot (P)</span>
-                        <span class="text-white font-medium">₹1,213.63</span>
+                        <span class="text-white font-medium">₹982.47</span>
                     </div>
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Support 1</span>
-                        <span class="text-white font-medium">₹1,190.27</span>
+                        <span class="text-white font-medium">₹972.13</span>
                     </div>
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Support 2</span>
-                        <span class="text-white font-medium">₹1,173.53</span>
+                        <span class="text-white font-medium">₹962.77</span>
                     </div>
                 </div>
             </div>
@@ -932,50 +860,50 @@
                 <div class="flex justify-between items-start mb-4">
                     <div>
                         <span class="bg-red-900 text-red-300 text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">SHORT SELL</span>
-                        <h3 class="text-2xl font-black text-white mt-2">BAJAJFINSV</h3>
-                        <p class="text-xs text-gray-400 font-medium">BAJAJFINSV.NS • Sector: <span class="text-indigo-300 font-bold">BANKING/FIN</span></p>
+                        <h3 class="text-2xl font-black text-white mt-2">ONGC</h3>
+                        <p class="text-xs text-gray-400 font-medium">ONGC.NS • Sector: <span class="text-indigo-300 font-bold">ENERGY/INFRA</span></p>
                     </div>
                     <div class="text-right">
                         <span class="text-xs text-gray-400 font-semibold block uppercase">Quant Score</span>
-                        <span class="text-3xl font-black text-red-400">75<span class="text-xs text-gray-500">/100</span></span>
+                        <span class="text-3xl font-black text-red-400">95<span class="text-xs text-gray-500">/100</span></span>
                     </div>
                 </div>
                 
                 <div class="grid grid-cols-2 gap-4 border-t border-b border-gray-700 py-3 my-4 text-sm text-gray-300">
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">Close Price</span>
-                        <span class="font-bold text-lg text-white">₹1,940.50</span>
+                        <span class="font-bold text-lg text-white">₹232.50</span>
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">Avg Range (ATR%)</span>
-                        <span class="font-bold text-lg text-white">1.72%</span>
+                        <span class="font-bold text-lg text-white">1.81%</span>
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">Rel Volume (RVOL)</span>
-                        <span class="font-bold text-lg text-white">1.04x</span>
+                        <span class="font-bold text-lg text-white">2.25x</span>
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">RSI (14)</span>
-                        <span class="font-bold text-lg text-white">42.2</span>
+                        <span class="font-bold text-lg text-white">42.9</span>
                     </div>
                 </div>
                 
                 <div class="space-y-2 mb-4">
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-red-400 font-bold uppercase">Trigger Entry (Below)</span>
-                        <span class="font-black text-white">₹1,921.10</span>
+                        <span class="font-black text-white">₹232.03</span>
                     </div>
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-green-400 font-bold uppercase">Stop-Loss (SL)</span>
-                        <span class="font-black text-white" id="sl-short-5">₹1,937.83</span>
+                        <span class="font-black text-white" id="sl-short-5">₹234.14</span>
                     </div>
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-yellow-400 font-bold uppercase">Target 1 (1:1 R:R)</span>
-                        <span class="font-black text-white">₹1,896.00</span>
+                        <span class="font-black text-white">₹228.88</span>
                     </div>
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-emerald-400 font-bold uppercase">Target 2 (2:1 R:R)</span>
-                        <span class="font-black text-white">₹1,870.90</span>
+                        <span class="font-black text-white">₹225.72</span>
                     </div>
                 </div>
             </div>
@@ -988,11 +916,11 @@
                 <div class="grid grid-cols-2 gap-3 mb-3">
                     <div>
                         <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Trading Capital</label>
-                        <input type="number" id="capital-short-5" value="50000" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionShort(5, 1921.0999755859375, 1937.8321140834264)">
+                        <input type="number" id="capital-short-5" value="50000" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionShort(5, 232.035, 234.13955862242264)">
                     </div>
                     <div>
                         <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Risk per Trade (%)</label>
-                        <input type="number" id="risk-short-5" value="1" step="0.5" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionShort(5, 1921.0999755859375, 1937.8321140834264)">
+                        <input type="number" id="risk-short-5" value="1" step="0.5" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionShort(5, 232.035, 234.13955862242264)">
                     </div>
                 </div>
                 <div class="bg-gray-950 p-2.5 rounded border border-gray-800 space-y-1 text-[11px] text-gray-300">
@@ -1015,15 +943,15 @@
                 <div class="grid grid-cols-3 text-center gap-1">
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Pivot (P)</span>
-                        <span class="text-white font-medium">₹1,934.77</span>
+                        <span class="text-white font-medium">₹236.05</span>
                     </div>
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Support 1</span>
-                        <span class="text-white font-medium">₹1,926.83</span>
+                        <span class="text-white font-medium">₹228.95</span>
                     </div>
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Support 2</span>
-                        <span class="text-white font-medium">₹1,913.17</span>
+                        <span class="text-white font-medium">₹225.39</span>
                     </div>
                 </div>
             </div>
@@ -1034,50 +962,50 @@
                 <div class="flex justify-between items-start mb-4">
                     <div>
                         <span class="bg-red-900 text-red-300 text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">SHORT SELL</span>
-                        <h3 class="text-2xl font-black text-white mt-2">DRREDDY</h3>
-                        <p class="text-xs text-gray-400 font-medium">DRREDDY.NS • Sector: <span class="text-indigo-300 font-bold">PHARMA</span></p>
+                        <h3 class="text-2xl font-black text-white mt-2">INDUSINDBK</h3>
+                        <p class="text-xs text-gray-400 font-medium">INDUSINDBK.NS • Sector: <span class="text-indigo-300 font-bold">BANKING/FIN</span></p>
                     </div>
                     <div class="text-right">
                         <span class="text-xs text-gray-400 font-semibold block uppercase">Quant Score</span>
-                        <span class="text-3xl font-black text-red-400">75<span class="text-xs text-gray-500">/100</span></span>
+                        <span class="text-3xl font-black text-red-400">85<span class="text-xs text-gray-500">/100</span></span>
                     </div>
                 </div>
                 
                 <div class="grid grid-cols-2 gap-4 border-t border-b border-gray-700 py-3 my-4 text-sm text-gray-300">
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">Close Price</span>
-                        <span class="font-bold text-lg text-white">₹1,143.00</span>
+                        <span class="font-bold text-lg text-white">₹978.20</span>
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">Avg Range (ATR%)</span>
-                        <span class="font-bold text-lg text-white">1.54%</span>
+                        <span class="font-bold text-lg text-white">2.21%</span>
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">Rel Volume (RVOL)</span>
-                        <span class="font-bold text-lg text-white">1.45x</span>
+                        <span class="font-bold text-lg text-white">1.94x</span>
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">RSI (14)</span>
-                        <span class="font-bold text-lg text-white">37.7</span>
+                        <span class="font-bold text-lg text-white">41.2</span>
                     </div>
                 </div>
                 
                 <div class="space-y-2 mb-4">
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-red-400 font-bold uppercase">Trigger Entry (Below)</span>
-                        <span class="font-black text-white">₹1,134.90</span>
+                        <span class="font-black text-white">₹972.30</span>
                     </div>
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-green-400 font-bold uppercase">Stop-Loss (SL)</span>
-                        <span class="font-black text-white" id="sl-short-6">₹1,143.73</span>
+                        <span class="font-black text-white" id="sl-short-6">₹983.11</span>
                     </div>
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-yellow-400 font-bold uppercase">Target 1 (1:1 R:R)</span>
-                        <span class="font-black text-white">₹1,121.66</span>
+                        <span class="font-black text-white">₹956.09</span>
                     </div>
                     <div class="bg-gray-900 p-2.5 rounded border border-gray-700 flex justify-between text-sm">
                         <span class="text-emerald-400 font-bold uppercase">Target 2 (2:1 R:R)</span>
-                        <span class="font-black text-white">₹1,108.43</span>
+                        <span class="font-black text-white">₹939.88</span>
                     </div>
                 </div>
             </div>
@@ -1090,11 +1018,11 @@
                 <div class="grid grid-cols-2 gap-3 mb-3">
                     <div>
                         <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Trading Capital</label>
-                        <input type="number" id="capital-short-6" value="50000" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionShort(6, 1134.9000244140625, 1143.7250191824776)">
+                        <input type="number" id="capital-short-6" value="50000" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionShort(6, 972.2999877929688, 983.1071297781808)">
                     </div>
                     <div>
                         <label class="text-gray-500 text-[10px] uppercase font-bold block mb-1">Risk per Trade (%)</label>
-                        <input type="number" id="risk-short-6" value="1" step="0.5" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionShort(6, 1134.9000244140625, 1143.7250191824776)">
+                        <input type="number" id="risk-short-6" value="1" step="0.5" class="w-full bg-gray-800 border border-gray-700 rounded p-1.5 text-white font-bold focus:outline-none focus:border-indigo-500" oninput="calculatePositionShort(6, 972.2999877929688, 983.1071297781808)">
                     </div>
                 </div>
                 <div class="bg-gray-950 p-2.5 rounded border border-gray-800 space-y-1 text-[11px] text-gray-300">
@@ -1117,15 +1045,15 @@
                 <div class="grid grid-cols-3 text-center gap-1">
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Pivot (P)</span>
-                        <span class="text-white font-medium">₹1,141.70</span>
+                        <span class="text-white font-medium">₹979.73</span>
                     </div>
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Support 1</span>
-                        <span class="text-white font-medium">₹1,136.20</span>
+                        <span class="text-white font-medium">₹970.77</span>
                     </div>
                     <div>
                         <span class="block text-gray-500 text-[10px] uppercase font-semibold">Support 2</span>
-                        <span class="text-white font-medium">₹1,129.40</span>
+                        <span class="text-white font-medium">₹963.33</span>
                     </div>
                 </div>
             </div>
@@ -1308,10 +1236,10 @@
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">ADANIPORTS</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,768.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">59.4</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.10x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.36%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,764.60</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">58.7</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.67x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.38%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">65</span>
             </td>
@@ -1324,12 +1252,12 @@
         </tr>
         
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">GRASIM</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹3,319.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">56.1</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.93x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.91%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">DIVISLAB</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">PHARMA</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹9,322.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">63.8</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.16x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.45%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">65</span>
             </td>
@@ -1344,10 +1272,10 @@
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">KOTAKBANK</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹416.55</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">57.8</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.65x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.69%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹419.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">59.8</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.24x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.73%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">65</span>
             </td>
@@ -1360,48 +1288,30 @@
         </tr>
         
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">ADANIENT</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹3,077.20</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">56.0</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.81x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">3.11%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">DRREDDY</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">PHARMA</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,165.50</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">47.8</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.04x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.67%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">55</span>
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">60</span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">5</span>
+                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">60</span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-green-950 text-green-300">BULLISH</span>
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-gray-700 text-gray-300">NEUTRAL</span>
             </td>
         </tr>
         
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">COALINDIA</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹432.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">75.1</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.79x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.98%</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">55</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">5</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-green-950 text-green-300">BULLISH</span>
-            </td>
-        </tr>
-        
-        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">DIVISLAB</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">PHARMA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹9,438.50</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">68.3</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.77x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.43%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹426.40</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">66.3</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.35x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.07%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">55</span>
             </td>
@@ -1416,10 +1326,28 @@
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">ONGC</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹237.27</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">52.5</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.13x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.52%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹232.50</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">42.9</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.25x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.81%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">45</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">95</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
+            </td>
+        </tr>
+        
+        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">GRASIM</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹3,281.90</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">50.8</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.46x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.86%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">40</span>
             </td>
@@ -1434,10 +1362,10 @@
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">POWERGRID</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹271.75</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">53.3</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.41x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.80%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹269.10</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">48.6</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.30x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.65%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">40</span>
             </td>
@@ -1450,12 +1378,66 @@
         </tr>
         
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">HINDALCO</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹981.50</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">39.2</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.53x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.40%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">35</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">95</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
+            </td>
+        </tr>
+        
+        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">CIPLA</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">PHARMA</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,366.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">33.8</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.12x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.62%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">35</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">85</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
+            </td>
+        </tr>
+        
+        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">ADANIENT</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹3,060.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">54.3</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.86x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">3.20%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">35</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">5</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-green-950 text-green-300">BULLISH</span>
+            </td>
+        </tr>
+        
+        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">APOLLOHOSP</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">PHARMA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹8,900.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">54.5</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.91x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.57%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹8,836.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">51.4</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.63x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.61%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">35</span>
             </td>
@@ -1470,10 +1452,10 @@
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">BAJAJ-AUTO</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">AUTOMOBILE</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹11,768.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">51.9</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.54x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.92%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹11,678.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">49.0</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.97x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.99%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">30</span>
             </td>
@@ -1486,12 +1468,12 @@
         </tr>
         
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">HINDALCO</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,014.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">48.1</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.70x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.14%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">TITAN</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">FMCG/CONSUMPTION</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹5,009.50</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">51.1</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.82x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.51%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">30</span>
             </td>
@@ -1504,66 +1486,12 @@
         </tr>
         
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">JSWSTEEL</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,304.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">51.2</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.68x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.91%</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">30</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">30</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-gray-700 text-gray-300">NEUTRAL</span>
-            </td>
-        </tr>
-        
-        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">NTPC</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹335.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">51.7</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.84x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.63%</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">30</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">30</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-gray-700 text-gray-300">NEUTRAL</span>
-            </td>
-        </tr>
-        
-        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">TATASTEEL</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹186.78</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">50.9</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.83x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.59%</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">30</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">30</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-gray-700 text-gray-300">NEUTRAL</span>
-            </td>
-        </tr>
-        
-        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">HCLTECH</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">IT</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,207.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">33.1</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.08x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.93%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">INDUSINDBK</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹978.20</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">41.2</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.94x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.21%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">25</span>
             </td>
@@ -1576,30 +1504,12 @@
         </tr>
         
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">BAJAJFINSV</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">BAJFINANCE</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,940.50</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">42.2</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.04x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.72%</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">25</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">75</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
-            </td>
-        </tr>
-        
-        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">DRREDDY</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">PHARMA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,143.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">37.7</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.45x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.54%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,034.50</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">37.9</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.14x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.85%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">25</span>
             </td>
@@ -1614,10 +1524,46 @@
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">HDFCBANK</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹693.80</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">34.4</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.02x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.85%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹708.25</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">43.9</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.16x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.98%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">25</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">75</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
+            </td>
+        </tr>
+        
+        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">SBIN</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹995.70</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">35.2</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.07x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.69%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">25</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">75</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
+            </td>
+        </tr>
+        
+        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">TATASTEEL</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹183.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">43.9</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.09x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.75%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">25</span>
             </td>
@@ -1632,10 +1578,10 @@
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">TCS</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">IT</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹2,204.10</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">38.5</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.02x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.54%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹2,200.80</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">38.2</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.07x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.56%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">25</span>
             </td>
@@ -1648,53 +1594,35 @@
         </tr>
         
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">ULTRACEMCO</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">TECHM</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">IT</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,541.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">41.6</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.09x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.64%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">25</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">75</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
+            </td>
+        </tr>
+        
+        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">NTPC</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹10,979.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">33.8</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.10x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.62%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹333.40</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">48.9</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.61x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.64%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">25</span>
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">20</span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">75</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
-            </td>
-        </tr>
-        
-        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">AXISBANK</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,246.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">47.3</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.89x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.88%</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">25</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">55</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
-            </td>
-        </tr>
-        
-        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">TITAN</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">FMCG/CONSUMPTION</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹5,021.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">52.9</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.67x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.46%</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">25</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">25</span>
+                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">20</span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-gray-700 text-gray-300">NEUTRAL</span>
@@ -1702,12 +1630,12 @@
         </tr>
         
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">ICICIBANK</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">BAJAJFINSV</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,384.50</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">38.8</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.19x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.60%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,913.50</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">37.2</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.23x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.78%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">15</span>
             </td>
@@ -1720,12 +1648,30 @@
         </tr>
         
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">INFY</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">EICHERMOT</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">AUTOMOBILE</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹7,530.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">33.3</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.06x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.95%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">15</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">75</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
+            </td>
+        </tr>
+        
+        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">HCLTECH</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">IT</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,036.50</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">32.2</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.11x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.83%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,206.10</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">33.0</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.09x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.95%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">15</span>
             </td>
@@ -1738,66 +1684,12 @@
         </tr>
         
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">WIPRO</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">IT</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹166.30</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">30.4</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.13x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.44%</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">15</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">75</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
-            </td>
-        </tr>
-        
-        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">BAJFINANCE</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,043.50</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">41.0</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.83x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.76%</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">15</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">65</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
-            </td>
-        </tr>
-        
-        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">BPCL</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">ASIANPAINT</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹303.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">36.1</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.65x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.47%</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">15</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">65</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
-            </td>
-        </tr>
-        
-        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">CIPLA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">PHARMA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,373.30</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">35.5</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.13x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.66%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹2,472.50</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">28.3</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.16x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.99%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">15</span>
             </td>
@@ -1812,10 +1704,10 @@
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">HDFCLIFE</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹526.15</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">41.9</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.41x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.31%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹530.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">44.1</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.33x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.36%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">15</span>
             </td>
@@ -1828,12 +1720,12 @@
         </tr>
         
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">ITC</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">FMCG/CONSUMPTION</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹259.30</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">35.0</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.27x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.97%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">JSWSTEEL</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,265.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">40.6</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.95x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.00%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">15</span>
             </td>
@@ -1846,14 +1738,68 @@
         </tr>
         
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">M&M</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">SBILIFE</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,684.70</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">34.5</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.36x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.01%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">15</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">65</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
+            </td>
+        </tr>
+        
+        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">MARUTI</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">AUTOMOBILE</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹3,123.80</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">30.9</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.27x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.10%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹12,400.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">23.7</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.44x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.98%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">15</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">55</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
+            </td>
+        </tr>
+        
+        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">AXISBANK</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,246.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">47.2</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.98x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.92%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">15</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">45</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
+            </td>
+        </tr>
+        
+        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">INFY</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">IT</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,037.70</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">32.5</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.76x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.78%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">65</span>
@@ -1866,12 +1812,12 @@
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">RELIANCE</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,274.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">41.2</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.86x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.72%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,257.50</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">37.0</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.82x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.76%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">15</span>
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">65</span>
@@ -1882,14 +1828,14 @@
         </tr>
         
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">TECHM</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">IT</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,525.80</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">37.8</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.74x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.60%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">SUNPHARMA</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">PHARMA</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,840.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">33.9</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.95x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.84%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">15</span>
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">65</span>
@@ -1900,48 +1846,12 @@
         </tr>
         
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">HINDUNILVR</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">FMCG/CONSUMPTION</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,942.30</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">32.7</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.99x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.45%</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">10</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">60</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
-            </td>
-        </tr>
-        
-        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">LT</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">BHARTIARTL</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">OTHER</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹3,955.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">44.0</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.07x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.39%</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">10</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">60</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
-            </td>
-        </tr>
-        
-        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">ASIANPAINT</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹2,498.10</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">31.1</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.98x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.87%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,831.10</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">40.9</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.73x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.89%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
             </td>
@@ -1954,12 +1864,12 @@
         </tr>
         
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">BHARTIARTL</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">OTHER</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,839.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">42.1</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.75x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.88%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">BPCL</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹304.50</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">38.2</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.86x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.56%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
             </td>
@@ -1974,28 +1884,10 @@
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">BRITANNIA</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">FMCG/CONSUMPTION</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹5,009.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">30.5</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.95x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.89%</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">55</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
-            </td>
-        </tr>
-        
-        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">EICHERMOT</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">AUTOMOBILE</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹7,697.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">40.7</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹4,962.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">28.3</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.71x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.87%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.86%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
             </td>
@@ -2010,10 +1902,64 @@
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">HEROMOTOCO</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">AUTOMOBILE</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹5,280.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">41.6</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.91x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.41%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹5,221.50</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">38.9</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.47x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.45%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">55</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
+            </td>
+        </tr>
+        
+        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">ICICIBANK</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,379.30</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">37.4</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.79x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.63%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">55</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
+            </td>
+        </tr>
+        
+        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">ITC</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">FMCG/CONSUMPTION</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹259.85</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">35.9</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.79x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.98%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">55</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
+            </td>
+        </tr>
+        
+        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">M&M</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">AUTOMOBILE</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹3,107.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">29.4</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.77x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.14%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
             </td>
@@ -2028,64 +1974,10 @@
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">NESTLEIND</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">FMCG/CONSUMPTION</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,386.20</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">33.3</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.42x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.11%</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">55</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
-            </td>
-        </tr>
-        
-        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">SBILIFE</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,700.60</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">36.9</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.00x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.05%</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">55</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
-            </td>
-        </tr>
-        
-        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">SBIN</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,009.70</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">39.6</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.77x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.67%</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">55</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
-            </td>
-        </tr>
-        
-        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">SUNPHARMA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">PHARMA</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,861.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">37.5</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.79x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.83%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,383.30</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">32.9</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.91x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.12%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
             </td>
@@ -2100,10 +1992,46 @@
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">TATACONSUM</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">FMCG/CONSUMPTION</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹999.60</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">31.3</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.93x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.60%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹991.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">29.2</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.85x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.55%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">55</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
+            </td>
+        </tr>
+        
+        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">ULTRACEMCO</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹11,000.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">34.5</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.90x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.71%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">55</span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
+            </td>
+        </tr>
+        
+        <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">WIPRO</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">IT</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹167.40</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">33.0</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.99x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.39%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
             </td>
@@ -2118,10 +2046,10 @@
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">SHRIRAMFIN</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,038.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">40.1</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.79x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.84%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,028.60</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">37.6</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.90x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.86%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
             </td>
@@ -2134,17 +2062,17 @@
         </tr>
         
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">MARUTI</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">AUTOMOBILE</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹12,590.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">27.1</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.99x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.94%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">HINDUNILVR</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">FMCG/CONSUMPTION</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,927.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">30.6</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.89x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.46%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">0</span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">45</span>
+                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">50</span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
@@ -2152,17 +2080,17 @@
         </tr>
         
         <tr class="border-b border-gray-800 hover:bg-gray-750 transition">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">INDUSINDBK</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹993.30</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">46.1</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.80x</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.12%</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">LT</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">OTHER</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹3,930.70</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">40.8</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.92x</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.48%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">5</span>
+                <span class="px-2 py-1 rounded text-xs font-black bg-green-900/40 text-green-400 border border-green-500/20">0</span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">35</span>
+                <span class="px-2 py-1 rounded text-xs font-black bg-red-900/40 text-red-400 border border-red-500/20">50</span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                 <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-red-950 text-red-300">BEARISH</span>
@@ -2226,11 +2154,11 @@
         
         function calculateLiveBankNiftyStatus(istTime) {
             const currentPrice = liveBankNiftyPrice;
-            const dailyLongTrigger = 56575.1484375;
-            const dailyShortTrigger = 56231.8515625;
+            const dailyLongTrigger = 56645.8515625;
+            const dailyShortTrigger = 55699.44921875;
             
-            const weeklyLongTrigger = 58024.94921875;
-            const weeklyShortTrigger = 56823.19921875;
+            const weeklyLongTrigger = 57426.8515625;
+            const weeklyShortTrigger = 55699.44921875;
             
             const dBadge = document.getElementById('daily-action-badge');
             const wBadge = document.getElementById('weekly-action-badge');
