@@ -36,7 +36,7 @@
                     <span id="market-state" class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-red-950 text-red-400 border border-red-500/20">CLOSED</span>
                 </div>
                 <div class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-xs">
-                    <span class="text-gray-400">Session:</span> <strong class="text-white">2026-10-02</strong>
+                    <span class="text-gray-400">Session:</span> <strong class="text-white">2026-10-05</strong>
                 </div>
             </div>
         </div>
@@ -163,13 +163,85 @@
                         This panel monitors live 15-minute price bars. The moment any Nifty 50 stock breaks above or below its first 15-minute candle range (09:15 - 09:30 AM), it is tracked here as an active momentum trade.
                     </p>
                     <div class="grid grid-cols-1 gap-4" id="orb-live-container">
-                        
-        <div class="col-span-full bg-slate-900/40 rounded-xl p-6 border border-slate-800 text-center text-xs text-gray-400">
-            <i class="fa-solid fa-hourglass-start text-yellow-500 text-lg mb-2"></i><br>
-            <strong>Waiting for regular market hours...</strong><br>
-            During trading sessions (09:15 AM - 03:30 PM IST), this panel scans active 15-minute bars and lists Nifty 50 stocks breaking their Opening Range in real-time!
-        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 col-span-full">
+        <div class="bg-slate-900/60 border border-green-500/20 rounded-2xl p-5 shadow">
+            <h4 class="text-green-400 font-bold text-sm mb-4 flex items-center gap-2 uppercase tracking-wider">
+                <i class="fa-solid fa-circle-arrow-up text-lg"></i> Live Bullish ORB Breakouts (Above 15m High)
+            </h4>
+            <div class="space-y-3">
         
+                <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
+                    <div>
+                        <strong class="text-white text-sm block">ITC</strong>
+                        <span class="text-gray-400">Range: ₹259.5 - ₹262.8</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-green-400 font-black block text-sm">₹268.90</span>
+                        <span class="text-green-500 font-bold bg-green-950 px-2 py-0.5 rounded text-[10px] uppercase">+2.34% Breakout</span>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
+                    <div>
+                        <strong class="text-white text-sm block">ICICIBANK</strong>
+                        <span class="text-gray-400">Range: ₹1303.9 - ₹1314.7</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-green-400 font-black block text-sm">₹1332.00</span>
+                        <span class="text-green-500 font-bold bg-green-950 px-2 py-0.5 rounded text-[10px] uppercase">+1.32% Breakout</span>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
+                    <div>
+                        <strong class="text-white text-sm block">BHARTIARTL</strong>
+                        <span class="text-gray-400">Range: ₹1744.5 - ₹1757.7</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-green-400 font-black block text-sm">₹1779.90</span>
+                        <span class="text-green-500 font-bold bg-green-950 px-2 py-0.5 rounded text-[10px] uppercase">+1.26% Breakout</span>
+                    </div>
+                </div>
+                </div></div>
+        <div class="bg-slate-900/60 border border-red-500/20 rounded-2xl p-5 shadow">
+            <h4 class="text-red-400 font-bold text-sm mb-4 flex items-center gap-2 uppercase tracking-wider">
+                <i class="fa-solid fa-circle-arrow-down text-lg"></i> Live Bearish ORB Breakdown (Below 15m Low)
+            </h4>
+            <div class="space-y-3">
+        
+                <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
+                    <div>
+                        <strong class="text-white text-sm block">HDFCBANK</strong>
+                        <span class="text-gray-400">Range: ₹725.3 - ₹733.8</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-red-400 font-black block text-sm">₹704.80</span>
+                        <span class="text-red-500 font-bold bg-red-950 px-2 py-0.5 rounded text-[10px] uppercase">+2.83% Breakdown</span>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
+                    <div>
+                        <strong class="text-white text-sm block">BPCL</strong>
+                        <span class="text-gray-400">Range: ₹303.2 - ₹306.5</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-red-400 font-black block text-sm">₹296.95</span>
+                        <span class="text-red-500 font-bold bg-red-950 px-2 py-0.5 rounded text-[10px] uppercase">+2.08% Breakdown</span>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800/40 p-3 rounded-xl border border-gray-700 flex justify-between items-center text-xs">
+                    <div>
+                        <strong class="text-white text-sm block">HCLTECH</strong>
+                        <span class="text-gray-400">Range: ₹1222.5 - ₹1245.8</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-red-400 font-black block text-sm">₹1201.90</span>
+                        <span class="text-red-500 font-bold bg-red-950 px-2 py-0.5 rounded text-[10px] uppercase">+1.69% Breakdown</span>
+                    </div>
+                </div>
+                </div></div></div>
                     </div>
                 </div>
                 <div class="mt-4 text-[10px] text-gray-500 italic flex items-center gap-1.5 border-t border-gray-800/60 pt-3">
@@ -236,7 +308,7 @@
                 </div>
                 <div class="bg-slate-900/50 p-4 rounded-xl border border-gray-800 text-xs">
                     <span class="text-gray-500 uppercase block font-bold text-[9px]">Daily 20 EMA</span>
-                    <strong class="text-slate-300 text-lg">₹55,827.30</strong>
+                    <strong class="text-slate-300 text-lg">₹55,827.79</strong>
                 </div>
                 <div class="bg-slate-900/50 p-4 rounded-xl border border-gray-800 text-xs">
                     <span class="text-gray-500 uppercase block font-bold text-[9px]">Weekly Close</span>
@@ -244,7 +316,7 @@
                 </div>
                 <div class="bg-slate-900/50 p-4 rounded-xl border border-gray-800 text-xs">
                     <span class="text-gray-500 uppercase block font-bold text-[9px]">Weekly 20 EMA</span>
-                    <strong class="text-slate-300 text-lg">₹56,604.63</strong>
+                    <strong class="text-slate-300 text-lg">₹56,610.23</strong>
                 </div>
             </div>
 
@@ -294,18 +366,18 @@
                         <!-- Bullish Trigger -->
                         <div class="bg-green-950/20 border border-green-500/10 p-3.5 rounded-xl space-y-1.5">
                             <span class="text-[10px] text-green-400 font-extrabold block uppercase tracking-wide">WEEKLY LONG TRIGGER</span>
-                            <div class="text-white text-sm font-extrabold">Above: <span class="text-base text-white font-black" id="weekly-long-trigger">₹56,671.10</span></div>
-                            <div class="text-slate-400 text-[10px]">SL: ₹55,864.2</div>
-                            <div class="text-green-300 text-[11px] font-bold">Target 1: ₹56,387.3</div>
-                            <div class="text-emerald-400 text-[11px] font-black">Target 2: ₹57,194.1</div>
+                            <div class="text-white text-sm font-extrabold">Above: <span class="text-base text-white font-black" id="weekly-long-trigger">₹55,390.10</span></div>
+                            <div class="text-slate-400 text-[10px]">SL: ₹54,542.2</div>
+                            <div class="text-green-300 text-[11px] font-bold">Target 1: ₹55,298.7</div>
+                            <div class="text-emerald-400 text-[11px] font-black">Target 2: ₹56,146.6</div>
                         </div>
                         <!-- Bearish Trigger -->
                         <div class="bg-red-950/20 border border-red-500/10 p-3.5 rounded-xl space-y-1.5">
                             <span class="text-[10px] text-red-400 font-extrabold block uppercase tracking-wide">WEEKLY SHORT TRIGGER</span>
-                            <div class="text-white text-sm font-extrabold">Below: <span class="text-base text-white font-black" id="weekly-short-trigger">₹55,341.20</span></div>
-                            <div class="text-slate-400 text-[10px]">SL: ₹55,864.2</div>
-                            <div class="text-red-300 text-[11px] font-bold">Target 1: ₹55,057.4</div>
-                            <div class="text-rose-400 text-[11px] font-black">Target 2: ₹54,534.3</div>
+                            <div class="text-white text-sm font-extrabold">Below: <span class="text-base text-white font-black" id="weekly-short-trigger">₹53,785.70</span></div>
+                            <div class="text-slate-400 text-[10px]">SL: ₹54,542.2</div>
+                            <div class="text-red-300 text-[11px] font-bold">Target 1: ₹53,694.3</div>
+                            <div class="text-rose-400 text-[11px] font-black">Target 2: ₹52,937.8</div>
                         </div>
                     </div>
                 </div>
@@ -533,7 +605,7 @@
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">RSI (14)</span>
-                        <span class="font-bold text-lg text-white">57.6</span>
+                        <span class="font-bold text-lg text-white">57.8</span>
                     </div>
                 </div>
                 
@@ -635,7 +707,7 @@
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">RSI (14)</span>
-                        <span class="font-bold text-lg text-white">51.8</span>
+                        <span class="font-bold text-lg text-white">51.9</span>
                     </div>
                 </div>
                 
@@ -956,7 +1028,7 @@
                     </div>
                     <div>
                         <span class="text-gray-500 text-xs block uppercase">RSI (14)</span>
-                        <span class="font-bold text-lg text-white">36.6</span>
+                        <span class="font-bold text-lg text-white">36.5</span>
                     </div>
                 </div>
                 
@@ -1309,7 +1381,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">KOTAKBANK</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹418.35</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">57.6</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">57.8</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">4.73x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.09%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1327,7 +1399,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">COALINDIA</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹420.40</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">51.8</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">51.9</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.01x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.74%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1435,7 +1507,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">SUNPHARMA</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">PHARMA</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,801.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">36.6</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">36.5</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.52x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.64%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1471,7 +1543,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">BAJAJ-AUTO</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">AUTOMOBILE</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹10,045.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">21.2</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">21.1</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">5.86x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.35%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1507,7 +1579,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">JSWSTEEL</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,233.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">38.9</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">38.8</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.28x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.95%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1525,7 +1597,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">M&M</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">AUTOMOBILE</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹2,860.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">22.6</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">22.5</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.63x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.14%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1543,7 +1615,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">MARUTI</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">AUTOMOBILE</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹11,386.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">21.4</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">21.3</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.33x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.95%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1561,7 +1633,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">TECHM</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">IT</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,533.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">44.2</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">44.1</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.53x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.40%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1579,7 +1651,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">ULTRACEMCO</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹10,710.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">37.9</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">37.8</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.99x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.81%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1597,7 +1669,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">BAJAJFINSV</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,732.60</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">24.4</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">24.3</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">3.04x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.11%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1615,7 +1687,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">EICHERMOT</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">AUTOMOBILE</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹6,920.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">18.5</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">18.3</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.23x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.66%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1669,7 +1741,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">GRASIM</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹2,962.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">27.7</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">27.6</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.82x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.95%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1687,7 +1759,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">HINDALCO</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹941.85</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">35.5</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">35.4</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.61x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.05%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1723,7 +1795,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">HCLTECH</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">IT</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,243.10</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">45.6</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">45.5</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.35x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.72%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1741,7 +1813,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">BRITANNIA</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">FMCG/CONSUMPTION</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹4,778.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">26.5</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">26.4</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.41x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.49%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1759,7 +1831,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">BHARTIARTL</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">OTHER</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,741.10</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">32.2</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">32.1</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.03x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.64%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1777,7 +1849,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">HINDUNILVR</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">FMCG/CONSUMPTION</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,836.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">28.9</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">29.0</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.05x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.68%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1813,7 +1885,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">NESTLEIND</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">FMCG/CONSUMPTION</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,307.70</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">29.9</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">29.8</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.47x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.07%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1849,7 +1921,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">ONGC</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹222.37</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">31.0</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">30.8</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.30x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.78%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1921,7 +1993,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">AXISBANK</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,217.10</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">44.4</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">44.5</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.43x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.09%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1939,7 +2011,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">BPCL</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹300.60</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">40.8</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">40.9</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.39x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.14%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1957,7 +2029,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">CIPLA</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">PHARMA</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,344.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">34.5</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">34.4</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.95x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.92%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1975,7 +2047,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">ICICIBANK</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,310.60</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">33.6</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">33.5</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.47x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.53%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -1993,7 +2065,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">TATACONSUM</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">FMCG/CONSUMPTION</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹957.00</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">33.7</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">33.6</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.49x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.86%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -2047,7 +2119,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">RELIANCE</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">ENERGY/INFRA</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹1,167.70</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">27.8</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">27.7</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.42x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.61%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -2065,7 +2137,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">HDFCBANK</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹721.20</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">49.2</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">49.1</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.32x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.91%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -2101,7 +2173,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">INDUSINDBK</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">BANKING/FIN</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹886.85</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">30.4</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">30.1</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">0.83x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.39%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -2137,7 +2209,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-white">WIPRO</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">IT</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹159.35</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">32.2</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">32.1</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1.00x</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2.15%</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -2229,8 +2301,8 @@
             const dailyLongTrigger = 55091.44921875;
             const dailyShortTrigger = 54066.6015625;
             
-            const weeklyLongTrigger = 56671.1015625;
-            const weeklyShortTrigger = 55341.19921875;
+            const weeklyLongTrigger = 55390.1015625;
+            const weeklyShortTrigger = 53785.69921875;
             
             const dBadge = document.getElementById('daily-action-badge');
             const wBadge = document.getElementById('weekly-action-badge');
